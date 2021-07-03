@@ -3,13 +3,36 @@ const getAlbumSearch = require('./searchFunctions/albumSearch')
 const getMusicSearch = require('./searchFunctions/musicSearch')
 
 let search
-
+let artist
+let album
+let music
 async function searchAllInformations(name) {
-    return {
-        title: 'Search',
-        artist: await getArtistSearch(name),
-        // album: await getAlbumSearch(name),
-        // music: await getMusicSearch(name)
+    artist = await getArtistSearch(name)
+    if(artist){
+        return {
+            title: 'Search',
+            artist: artist,
+        }
+    }else{
+        album = await getAlbumSearch(name)
+        if(album){
+            return {
+                title: 'Search',
+                album: album,
+            }
+        }else{
+            music = await getMusicSearch(name)
+            if(music){
+                return{
+                    title: 'Search',
+                    music: music
+                }
+            }else{
+                return{
+                    title: 'NotFound'
+                }
+            }
+        }
     }
 }
 /*

@@ -31,6 +31,8 @@ const Header = props => {
         informations.push(album)
     if (music)
         informations.push(music)
+    if(!artist && !album && !music)
+        alert('Resultado de pesquisa não encontrado!')
 
     const setValue = async (event) => {
         setInputValue(event.target.value)
@@ -68,6 +70,7 @@ const Header = props => {
             type = 'Album'
         else if (information.type == 'artist')
             type = 'Artista'
+        console.log(information)
         return (
             <li key={information.mbid} data-mbid={information.mbid} data-type={information.type} onClick={handleInformation}>
                 <a href="#">
