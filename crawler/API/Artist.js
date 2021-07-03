@@ -1,6 +1,5 @@
 // Importando bibliotecas.
 const axios = require('axios')
-const translate = require("translate"); 
 // Importando as funções de outros arquivos.
 const { createNewMbid } = require('./adjusts/newMbid')
 const downloadImage = require('./adjusts/downloadImage');
@@ -53,14 +52,15 @@ async function getArtistInfo(artistMbid, artistName, artistUrl) {
     Essa URL retorna mais informacoes sobre um determinado artista.
     Informacao adquirida: Biografia do artista.
     */
+   console.log(artistMbid)
+   console.log(artistName)
     await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtistName}&api_key=d3fa18ca96490032eea33ffb8bf42b6f&format=json`)
-        .then(res => {
+        .then(async res => {
             if (res.data.error)
                 console.log(res.data)
             error = false
             artistMbid = res.data.artist.mbid
             artistBiography = res.data.artist.bio ? res.data.artist.bio.summary : null
-            artistBiography ? artistBiography = await translate(artistBiography, "pt") : null
         })
         .catch(async e => {
             console.log(`Erro (getArtistInfo): ${e}`)
