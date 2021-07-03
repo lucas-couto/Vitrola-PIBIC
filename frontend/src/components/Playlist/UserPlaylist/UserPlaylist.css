@@ -1,0 +1,116 @@
+.playlistMusic{
+    overflow: auto;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-right: 10px;
+    border-right: solid 1px black;
+    border-width: 100%;
+}
+.playlistMusic ul{
+    padding: 0;
+}
+.playlistMusic li{
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.playlistMusic li img{
+    justify-self: center;
+    grid-column: 0/span 1;
+}
+.playlistMusic li strong{
+    justify-self: center;
+    grid-column: 2/span 1;
+}
+
+.playlistMusic li .buttonsMusic{
+    justify-self: flex-start;
+    grid-column: 3/span 1;
+}
+
+
+.musicInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.musicInfo label{
+    font-family: 'Courier New', Courier, monospace;
+}
+.musicInfo strong{
+    font-size: 18px;
+}
+
+.Artist{
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+}
+
+@media (max-width: 575.98px) { 
+    .playlistMusic label{
+        font-size: 12px;
+    }
+    .playlistMusic li strong{
+        font-size: 10px;
+    }
+    .playlistMusic li label{
+        font-size: 8px;
+    }
+    .playlistMusic li img{
+        justify-self: flex-start;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .playlistMusic li strong{
+        font-size: 12px;
+    }
+    .playlistMusic li label{
+        font-size: 10px;
+    }
+    .playlistMusic li img{
+        width: 30px;
+        height: 30px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .playlistMusic li strong{
+        font-size: 15px;
+    }
+    .playlistMusic li label{
+        font-size: 13px;
+    }
+    .playlistMusic li img{
+        width: 40px;
+        height: 40px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1366px) {
+    .playlistMusic li strong{
+        font-size: 18px;
+    }
+    .playlistMusic li label{
+        font-size: 16px;
+    }
+    .playlistMusic li img{
+        width: 50px;
+        height: 50px;
+    }
+}
+@media (min-width: 1367px) { 
+    .playlistMusic li strong{
+        font-size: 25px;
+    }
+    .playlistMusic li label{
+        font-size: 23px;
+    }
+    .playlistMusic li img{
+        width: 70px;
+        height: 70px;
+    }
+    .playlistMusic label{
+        font-size: 30px;
+    }
+}

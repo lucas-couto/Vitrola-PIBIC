@@ -1,0 +1,98 @@
+.musicBiography{
+    border-bottom: solid 1px black;
+    border-top: solid 1px black;
+}
+
+.musicList{
+    width: 100%;
+    overflow: auto;
+    margin-bottom: 5px;
+}
+
+.musicList ul{
+    overflow: auto;
+    margin: 5px;
+    padding: 0;
+    list-style-type: none;
+    max-height: 43vh;
+}
+.musicList li{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.musicList ul :hover{
+    background-color: darkgray;
+}
+.musicList li img{
+    justify-self: center;
+}
+.musicList li strong{
+    justify-self: center;
+}
+.musicList li .buttonsMusic{
+    justify-self: center;
+}
+
+.buttonsMusic{
+    display: flex;
+    justify-content: center;
+    justify-self: end;
+}
+
+@media (max-width: 575.98px) { 
+    .musicList ul{
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    .musicList ul{
+        margin-right: 5px;
+        margin-left: 5px;
+        max-height: 10vh;
+        min-height: 2vh;
+    }
+    .musicList li strong{
+        font-size: 12px;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .musicList li strong{
+        font-size: 13px;
+    }
+    .musicImage{
+        width: 30px;
+        height: 30px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .musicList li strong{
+        font-size: 15px;
+    }
+    .musicImage{
+        width: 40px;
+        height: 40px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1366px) {
+    .musicList ul{
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    .musicList li strong{
+        font-size: 18px;
+    }
+    .musicImage{
+        width: 50px;
+        height: 50px;
+    }
+}
+@media (min-width: 1367px) { 
+    .musicList li strong{
+        font-size: 25px;
+    }
+    .musicImage{
+        width: 70px;
+        height: 70px;
+    }
+}

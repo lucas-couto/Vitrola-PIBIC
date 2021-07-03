@@ -1,0 +1,200 @@
+.albumList{
+    border: solid 1px black
+}
+
+.albumContent{
+    border-top: solid 1px black;
+}
+
+.featuredItem{
+    /* box-shadow: 5px 5px 5px #000000; */
+    background-color: #FF6161;
+    color: #ffffff;
+    font-size: 20px;
+    border-bottom: none;
+    /* text-; */
+}
+.albums .featuredItem :hover{
+    background-color: rgb(78, 78, 78);
+}
+.albumContent .albumBiographyBtn{
+    width: 20vw;
+    margin: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+    color: white;
+    background-color: #2B2B2B;
+}
+
+.albumBiography{
+    margin: 5px;
+}
+
+.Musics{
+    background-color: '#9C9C9C';
+}
+
+.albumsListBtn{
+    width: 25vw;
+    height: 5vh;
+    margin: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+    color: white;
+    background-color: #2B2B2B;
+}
+
+.featureAlbum{
+    display: block;
+}
+.albumInfo{
+    height: 100%;
+    overflow: auto;
+    width: 25vw;
+}
+.albums{
+    /* display: block; */
+    min-height: 9vh;
+    max-height: 90vh;
+    width: 25vw;
+    overflow:auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.albums li:hover{
+    background-color: darkgrey;
+}
+.albums li a{
+    display: grid;
+    grid-template-columns: 30% 60% 10%;
+    justify-content: space-between;
+    align-items: center;
+}
+.albums li a strong{
+    justify-self: center;
+}
+
+.albums li a img{
+    justify-self: center;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.albums ul{
+    padding: 0;
+    list-style-type: none;
+    max-height: 50vh;
+}
+.albums a{
+    text-decoration: none;
+    color: #000000;
+}
+
+@media (max-width: 575.98px) { 
+    .albumContent .albumBiographyBtn{
+        font-size: 12px;
+        width: 40vw;
+        height: 3vh;
+    }
+    .albumInfo{
+        height: 14vh;
+        width: 80vw;
+        overflow: auto;
+    }
+    .albums{
+        width: 80vw;
+        max-height: 14vh;
+        min-height: 2vh;
+    }
+    .albums li strong{
+        font-size: 12px;
+    }
+    .albums ul{
+        margin-bottom: 5px;
+        height: 15vh;
+    }
+    .albumsListBtn{
+        font-size: 15px;
+        width: 40vw;
+        height: 3vh;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .albumName{
+        font-size: 20px;
+    }
+    .albums li a strong{
+        font-size: 15px;
+    }
+    .albums li a img{
+        width: 30px;
+        height: 30px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .albumName{
+        font-size: 25px;
+    }
+    .albums li a strong{
+        font-size: 20px;
+    }
+    .albums li a img{
+        width: 40px;
+        height: 40px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1366px) {
+    .albumContent .albumBiographyBtn{
+        font-size: 15px;
+        width: 20vw;
+        height: 3vh;
+    }
+    .albumInfo{
+        width: 27vw;
+    }
+    .albums{
+        width: 27vw;
+        max-height: 70vh;
+        min-height: 2vh;
+    }
+    .albums li strong{
+        font-size: 15px;
+    }
+    .albums ul{
+        max-height: 50vh;
+    }
+    .albumsListBtn{
+        font-size: 15px;
+        width: 20vw;
+        height: 5vh;
+    }
+    .albumName{
+        font-size: 25px;
+    }
+    .albums li a strong{
+        font-size: 20px;
+    }
+    .albums li a img{
+        width: 50px;
+        height: 50px;
+    }
+}
+@media (min-width: 1367px) {
+    .albumName{
+        font-size: 40px;
+    }
+    .albums li a strong{
+        font-size: 30px;
+    }
+    .albums li a img{
+        width: 70px;
+        height: 70px;
+    }
+}

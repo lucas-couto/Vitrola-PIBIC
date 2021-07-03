@@ -1,0 +1,63 @@
+.Playlist{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 20% 80%;
+    margin: 5px;
+    background-color: #FF6161;
+}
+
+.Title{
+    grid-column: 1/ span 2;
+    grid-row: 1/ 2;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.Title span{
+    margin-right: 3px;
+}
+
+.Content{
+    grid-column: 1/ span 2;
+    grid-row: 2/ 3;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+@media(min-height: 192){
+    .Playlist{
+        overflow: auto;
+    }
+}
+
+@media (max-width: 575.98px) { 
+    .Title{
+        font-size: 15px;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .Title{
+        font-size: 18px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .Title{
+        font-size: 20px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1366px) {
+    .Title{
+        font-size: 25px;
+    }
+}
+@media (min-width: 1367px) { 
+    .Title{
+        font-size: 30px;
+    }
+}

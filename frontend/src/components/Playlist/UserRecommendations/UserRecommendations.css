@@ -1,0 +1,115 @@
+.playlistRecommendations{
+    overflow: auto;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-right: 10px;
+    border-width: 100%;
+}
+.playlistRecommendations ul{
+    padding: 0;
+}
+.playlistRecommendations li{
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.playlistRecommendations li img{
+    justify-self: center;
+    grid-column: 0/span 1;
+}
+.playlistRecommendations li strong{
+    justify-self: center;
+    grid-column: 2/span 1;
+}
+
+.playlistRecommendations li .buttonsMusic{
+    justify-self: flex-start;
+    grid-column: 3/span 1;
+}
+
+
+.musicInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.musicInfo label{
+    font-family: 'Courier New', Courier, monospace;
+}
+.musicInfo strong{
+    font-size: 18px;
+}
+
+.Artist{
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+}
+
+@media (max-width: 575.98px) { 
+    .playlistRecommendations label{
+        font-size: 12px;
+    }
+    .playlistRecommendations li strong{
+        font-size: 10px;
+    }
+    .playlistRecommendations li label{
+        font-size: 8px;
+    }
+    .playlistRecommendations li img{
+        justify-self: flex-start;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .playlistRecommendations li strong{
+        font-size: 12px;
+    }
+    .playlistRecommendations li label{
+        font-size: 10px;
+    }
+    .playlistMusic li img{
+        width: 30px;
+        height: 30px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .playlistRecommendations li strong{
+        font-size: 15px;
+    }
+    .playlistRecommendations li label{
+        font-size: 13px;
+    }
+    .playlistMusic li img{
+        width: 40px;
+        height: 40px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1366px) {
+    .playlistRecommendations li strong{
+        font-size: 18px;
+    }
+    .playlistRecommendations li label{
+        font-size: 16px;
+    }
+    .playlistRecommendations li img{
+        width: 50px;
+        height: 50px;
+    }
+}
+@media (min-width: 1367px) { 
+    .playlistRecommendations li strong{
+        font-size: 25px;
+    }
+    .playlistRecommendations li label{
+        font-size: 23px;
+    }
+    .playlistRecommendations li img{
+        width: 70px;
+        height: 70px;
+    }
+    .playlistRecommendations label{
+        font-size: 30px;
+    }
+}

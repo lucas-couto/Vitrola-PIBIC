@@ -1,0 +1,107 @@
+.Footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    background-color: #3E3E3E;
+    height: 100%;
+}
+
+.playPause{
+    display: flex;
+    margin-left: 10px;
+    justify-content: center;
+    justify-self: start;
+    grid-area: 1/1;
+}
+
+.musicAlbum{
+    justify-self: center;
+    grid-area: 1/2 ;
+}
+.musicAlbum .Music{
+    display: flex;
+    justify-content: center;
+}
+
+.musicAlbum .Album{
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+}
+.controls{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.progress strong{
+    color: #ffffff;
+}
+.volume{
+    display: flex;
+    align-items: center;
+}
+#Music{
+    color: white;
+    font-size: 20px;
+}
+
+#Album{
+    color: white;
+    font-size: 15px;
+}
+
+@media (max-width: 575.98px) {
+    .Footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .volume {display: none;}
+    .progress progress{width: 50px;}
+    .progress strong {font-size: 10px;}
+    .playPause{
+        width: 50px;
+    }
+    #Music {font-size: 12px;}
+    #Album {font-size: 10px;}
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    #Music {font-size: 15px;}
+    #Album {font-size: 12px;}
+    .progress strong {font-size: 12px;}
+    .progress progress{width: 50px;}
+    .volume input{width: 50px;}
+}
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    #Music {font-size: 17px;}
+    #Album {font-size: 15px;}
+    .progress progress{width: 70px;}
+    .volume input{width: 70px;}
+}
+@media (min-width: 992px) and (max-width: 1366px) {
+    .progress progress{width: 80px;}
+    .volume input{width: 80px;}
+    .musicAlbum .Music{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .musicAlbum .Album{
+        display: flex;
+        justify-content: center;
+        font-style: italic;
+    }
+}
+@media (min-width: 1367px) { 
+    #Music{
+        font-size: 30px;
+    }
+    #Album{
+        font-size: 25px;
+    }
+    .progress strong{
+        font-size: 20px;
+    }
+}
