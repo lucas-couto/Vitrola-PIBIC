@@ -60,7 +60,7 @@ async function getArtistInfo(artistMbid, artistName, artistUrl) {
             error = false
             artistMbid = res.data.artist.mbid
             artistBiography = res.data.artist.bio ? res.data.artist.bio.summary : null
-            artistBiography ? artistBiography = await translate(artistBiography) : null
+            artistBiography ? artistBiography = await translate(artistBiography, "pt") : null
         })
         .catch(async e => {
             console.log(`Erro (getArtistInfo): ${e}`)
