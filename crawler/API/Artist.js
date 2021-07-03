@@ -1,6 +1,6 @@
 // Importando bibliotecas.
 const axios = require('axios')
-
+const translate = require("translate"); 
 // Importando as funções de outros arquivos.
 const { createNewMbid } = require('./adjusts/newMbid')
 const downloadImage = require('./adjusts/downloadImage');
@@ -60,6 +60,7 @@ async function getArtistInfo(artistMbid, artistName, artistUrl) {
             error = false
             artistMbid = res.data.artist.mbid
             artistBiography = res.data.artist.bio ? res.data.artist.bio.summary : null
+            artistBiography ? artistBiography = await translate(artistBiography) : null
         })
         .catch(async e => {
             console.log(`Erro (getArtistInfo): ${e}`)
