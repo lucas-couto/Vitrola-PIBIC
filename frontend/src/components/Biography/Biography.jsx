@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Biography.css'
 import Albums from './Albums/Albums'
 import { connect } from 'react-redux'
+import API from '../../store/api'
 
 const Biography = props => {
     const { artistMbid, artistName, artistBiography, artistImage } = props
@@ -41,8 +42,8 @@ const Biography = props => {
             <div className="imageBiography" style={{ display: displayImage }}>
                 {artistImage ?
                 <img 
-                src={process.env.PUBLIC_URL + artistImage}
-                onError={e => {e.target.src = process.env.PUBLIC_URL + "./photos/artists/principalArtistIcon.png"}} /> 
+                src={`${API}/image/${artistImage}`}
+                onError={e => {e.target.src = `${API}/image//artist/principalArtistIcon.png`}} /> 
             : <p><strong>Imagem do Artista</strong></p>}
             </div>
             <div className="contentBiography" style={{ display: displayTextBiography }}>

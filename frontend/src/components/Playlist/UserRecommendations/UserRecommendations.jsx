@@ -1,5 +1,5 @@
 import React from 'react'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import './UserRecommendations.css'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import IconButton from '@material-ui/core/IconButton';
@@ -42,9 +42,9 @@ const UserRecommendations = props => {
                 <li data-mbid={music.musicMbid} data-name={music.musicName} data-albumname={music.musicAlbumName} key={music.musicMbid}>
                     <img
                         className="musicImage"
-                        src={process.env.PUBLIC_URL+music.musicDirectoryImage}
+                        src={`${API}/image/${music.musicImage}`}
                         width="30" height="30"
-                        onError={e => { e.target.src = "./photos/musics/principalMusicIcon.png" }}
+                        onError={e => { e.target.src = `${API}/image//music/principalMusicIcon.png` }}
                     />
                     <div className="musicInfo">
                         <strong>
@@ -56,17 +56,17 @@ const UserRecommendations = props => {
                     </div>
                     <div className="buttonsMusic">
                         {animatedPlayPause(music.musicMbid, music.musicName, music.musicYoutubeUrl, music.musicAlbumName)}
-                        <IconButton 
-                        size="small" 
-                        onClick={handleAddPlaylist}
-                        data-mbid={music.musicMbid} 
-                        data-name={music.musicName} 
-                        data-urlyoutube={music.musicYoutubeUrl} 
-                        data-directoryimage={music.musicDirectoryImage} 
-                        data-albumname={music.musicAlbumName} 
-                        data-albummbid={music.musicAlbumMbid} 
-                        data-artistmbid={music.musicArtistMbid} 
-                        data-artistname={music.musicArtistName}
+                        <IconButton
+                            size="small"
+                            onClick={handleAddPlaylist}
+                            data-mbid={music.musicMbid}
+                            data-name={music.musicName}
+                            data-urlyoutube={music.musicYoutubeUrl}
+                            data-directoryimage={music.musicDirectoryImage}
+                            data-albumname={music.musicAlbumName}
+                            data-albummbid={music.musicAlbumMbid}
+                            data-artistmbid={music.musicArtistMbid}
+                            data-artistname={music.musicArtistName}
                         >
                             {responsiveIcon()}
                         </IconButton>

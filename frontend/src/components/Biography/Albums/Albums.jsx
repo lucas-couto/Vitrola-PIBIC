@@ -4,7 +4,7 @@ import './Albums.css'
 import Musics from './Musics/Musics'
 import { connect } from 'react-redux'
 import { album } from '../../../store/actions/albumAction'
-
+import API from '../../../store/api'
 let name
 let mbid
 const Albums = props => {
@@ -22,8 +22,8 @@ const Albums = props => {
                 <div className="featuredAlbum">
                     <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                         <a href="#">
-                            <img src={process.env.PUBLIC_URL + album.albumImage} width="50" height="50" 
-                            onError={e => {e.target.src = process.env.PUBLIC_URL + "./photos/musics/principalMusicIcon.png"}}/>
+                            <img src={`${API}/image/${album.albumImage}`} width="50" height="50" 
+                            onError={e => {e.target.src = `${API}/image//music/principalMusicIcon.png`}}/>
                             <strong>{album.albumName}</strong>
                         </a>
                     </li>
@@ -33,8 +33,8 @@ const Albums = props => {
         return (
             <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                 <a href="#">
-                    <img src={album.albumImage} width="50" height="50" 
-                    onError={e => {e.target.src = process.env.PUBLIC_URL + "./photos/musics/principalMusicIcon.png"}}/>
+                    <img src={`${API}/image/${album.albumImage}`} width="50" height="50" 
+                    onError={e => {e.target.src = `${API}/image//music/principalMusicIcon.png`}}/>
                     <strong>{album.albumName}</strong>
                 </a>
             </li>

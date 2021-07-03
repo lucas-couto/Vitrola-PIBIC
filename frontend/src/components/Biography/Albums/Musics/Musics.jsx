@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import { playMusic, stopMusic } from '../../../../store/actions/playMusicAction'
 import { addPlaylistMusic } from '../../../../store/actions/playlistAction'
 import { recommendation } from '../../../../store/actions/recommendationAction'
-
+import API from '../../../store/api'
 let musicName
 let musicMbid
 let musicYoutubeUrl
@@ -103,7 +103,7 @@ const Musics = props => {
                         <PauseCircleOutlineIcon style={{ fontSize: 30, color: grey[900] }} />
                     </IconButton>
                 )
-            } else if(veryLarge){
+            } else if (veryLarge) {
                 return (
                     <IconButton size="small" onClick={handleStopMusic} data-mbid={musicMbid} data-name={musicName} data-urlyoutube={urlYoutube} data-albumname={albumName}>
                         <PauseCircleOutlineIcon style={{ fontSize: 40, color: grey[900] }} />
@@ -129,7 +129,7 @@ const Musics = props => {
                         <PlayCircleOutlineIcon style={{ fontSize: 30, color: grey[900] }} />
                     </IconButton>
                 )
-            } else if(veryLarge){
+            } else if (veryLarge) {
                 return (
                     <IconButton size="small" onClick={handlePlayMusic} data-mbid={musicMbid} data-name={musicName} data-urlyoutube={urlYoutube} data-albumname={albumName}>
                         <PlayCircleOutlineIcon style={{ fontSize: 40, color: grey[900] }} />
@@ -146,9 +146,9 @@ const Musics = props => {
                     <li data-mbid={music.musicMbid} data-name={music.musicName} key={music.musicMbid}>
                         <img
                             className="musicImage"
-                            src={process.env.PUBLIC_URL+music.musicImage}
+                            src={`${API}/image/${music.musicImage}`}
                             width="30" height="30"
-                            onError={e => { e.target.src = process.env.PUBLIC_URL+"./photos/musics/principalMusicIcon.png"}}
+                            onError={e => { e.target.src = `${API}/image//music/principalMusicIcon.png` }}
                         />
                         <strong>
                             {music.musicName}
@@ -167,9 +167,9 @@ const Musics = props => {
                 <li data-mbid={music.musicMbid} data-name={music.musicName} key={music.musicMbid}>
                     <img
                         className="musicImage"
-                        src={process.env.PUBLIC_URL+music.musicImage}
+                        src={`${API}/image/${music.musicImage}`}
                         width="30" height="30"
-                        onError={e => { e.target.src = process.env.PUBLIC_URL+"/photos/musics/principalMusicIcon.png" }}
+                        onError={e => { e.target.src = `${API}/image//music/principalMusicIcon.png` }}
                     />
                     <strong>
                         {music.musicName}

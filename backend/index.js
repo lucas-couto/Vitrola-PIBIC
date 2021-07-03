@@ -15,6 +15,7 @@ const { ArtistSimilars } = require('./API/itens/ArtistSimilars')
 const { Album } = require('./API/itens/Album')
 const { Music } = require('./API/itens/Music')
 const { Recommendation } = require('./API/itens/Recommendation')
+const { Images } = require('./API/itens/Images')
 const { Search } = require('./API/Search')
 
 app.use(bodyParser.json())
@@ -28,9 +29,7 @@ app.get('/artist/:artistMbid', Artist)
 app.get('/album/:albumMbid', Album)
 app.get('/music/:musicMbid', Music)
 app.get('/music/recommendation/:playlistMusics', Recommendation)
-app.get('/ola', (req,res) =>{
-  res.sendFile("C:/Users/Lucas/Desktop/Projeto Facul/Projeto 1/Software/photos/artist/principalArtistIcon.png")
-})
+app.get('/image/:imageDirectory', Images)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
 })
