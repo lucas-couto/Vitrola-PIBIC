@@ -8,7 +8,7 @@ async function getAlbumSearch(name) {
                 exists = true
                 albumMbid = album.album_mbid
                 albumName = album.name
-                albumImage = album.directoryImage.replace('.', '')
+                albumImage = album.directoryImage
             } else {
                 exists = false
             }

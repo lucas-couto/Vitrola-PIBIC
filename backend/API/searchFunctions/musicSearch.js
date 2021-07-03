@@ -9,7 +9,7 @@ async function getMusicSearch(name) {
                 exists = true
                 musicMbid = music.music_mbid
                 musicName = music.name
-                musicImage = music.directoryImage.replace('.', '')
+                musicImage = music.directoryImage
             } else {
                 exists = false
             }

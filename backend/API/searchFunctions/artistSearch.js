@@ -7,7 +7,7 @@ async function getArtistSearch(name) {
                 exists = true
                 artistMbid = artist.artist_mbid
                 artistName = artist.name
-                artistImage = artist.directoryImage.replace('.', '')
+                artistImage = artist.directoryImage
             } else {
                 exists = false
             }
