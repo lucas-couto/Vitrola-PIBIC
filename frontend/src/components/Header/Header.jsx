@@ -31,23 +31,30 @@ const Header = props => {
         informations.push(album)
     if (music)
         informations.push(music)
-
     const setValue = async (event) => {
         setInputValue(event.target.value)
     }
     const handleKeyDown = async event => {
         if (event.key === 'Enter' && event.target.value) {
+            if(inputValue){
+                setLoadingLoop('block')
+                await props.searchInformation(event.target.value)
+                setLoadingLoop('none')
+                setShowResults(true)
+            }else{
+                alert('Os dados de pesquisa estão vazios!')
+            }
+        }
+    }
+    const handleSearch = async () => {
+        if(inputValue){
             setLoadingLoop('block')
             await props.searchInformation(event.target.value)
             setLoadingLoop('none')
             setShowResults(true)
+        }else{
+            alert('Os dados de pesquisa estão vazios!')
         }
-    }
-    const handleSearch = async () => {
-        setLoadingLoop('block')
-        await props.searchInformation(inputValue)
-        setLoadingLoop('none')
-        setShowResults(true)
     }
     const handleInformation = (e) => {
         mbid = e.currentTarget.getAttribute("data-mbid")
