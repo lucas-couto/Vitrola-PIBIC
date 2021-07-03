@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { playMusic, stopMusic } from '../../../store/actions/playMusicAction'
 import { addPlaylistMusic } from '../../../store/actions/playlistAction'
 import { recommendation } from '../../../store/actions/recommendationAction'
+import API from '../../../store/api'
 let musicMbid
 let musicName
 let musicYoutubeUrl
