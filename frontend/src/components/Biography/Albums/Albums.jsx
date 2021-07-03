@@ -22,8 +22,8 @@ const Albums = props => {
                 <div className="featuredAlbum">
                     <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                         <a href="#">
-                            <img src={`${API}/image/${album.albumImage}`} width="50" height="50" 
-                            onError={e => {e.target.src = `${API}/image//music/principalMusicIcon.png`}}/>
+                            <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50" 
+                            onError={e => {e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png`}}/>
                             <strong>{album.albumName}</strong>
                         </a>
                     </li>
@@ -33,8 +33,8 @@ const Albums = props => {
         return (
             <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                 <a href="#">
-                    <img src={`${API}/image/${album.albumImage}`} width="50" height="50" 
-                    onError={e => {e.target.src = `${API}/image//music/principalMusicIcon.png`}}/>
+                    <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50" 
+                    onError={e => {e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png`}}/>
                     <strong>{album.albumName}</strong>
                 </a>
             </li>

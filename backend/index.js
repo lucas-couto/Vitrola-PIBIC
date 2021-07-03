@@ -29,7 +29,7 @@ app.get('/artist/:artistMbid', Artist)
 app.get('/album/:albumMbid', Album)
 app.get('/music/:musicMbid', Music)
 app.get('/music/recommendation/:playlistMusics', Recommendation)
-app.get('/image/:imageDirectory', Images)
+app.get('/image', Images)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
 })

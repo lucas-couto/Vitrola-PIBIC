@@ -146,9 +146,9 @@ const Musics = props => {
                     <li data-mbid={music.musicMbid} data-name={music.musicName} key={music.musicMbid}>
                         <img
                             className="musicImage"
-                            src={`${API}/image/${music.musicImage}`}
+                            src={`${API}/image?imageDirectory=${music.musicImage}`}
                             width="30" height="30"
-                            onError={e => { e.target.src = `${API}/image//music/principalMusicIcon.png` }}
+                            onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }}
                         />
                         <strong>
                             {music.musicName}
@@ -167,9 +167,9 @@ const Musics = props => {
                 <li data-mbid={music.musicMbid} data-name={music.musicName} key={music.musicMbid}>
                     <img
                         className="musicImage"
-                        src={`${API}/image/${music.musicImage}`}
+                        src={`${API}/image?imageDirectory=${music.musicImage}`}
                         width="30" height="30"
-                        onError={e => { e.target.src = `${API}/image//music/principalMusicIcon.png` }}
+                        onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }}
                     />
                     <strong>
                         {music.musicName}

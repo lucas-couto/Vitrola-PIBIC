@@ -42,8 +42,8 @@ const Biography = props => {
             <div className="imageBiography" style={{ display: displayImage }}>
                 {artistImage ?
                 <img 
-                src={`${API}/image/${artistImage}`}
-                onError={e => {e.target.src = `${API}/image//artist/principalArtistIcon.png`}} /> 
+                src={`${API}/image?imageDirectory=${artistImage}`}
+                onError={e => {e.target.src = `${API}/image?imageDirectory=/artist/principalArtistIcon.png`}} /> 
             : <p><strong>Imagem do Artista</strong></p>}
             </div>
             <div className="contentBiography" style={{ display: displayTextBiography }}>

@@ -1,6 +1,6 @@
 let imageDirectory
 function Images(req, res) {
-    imageDirectory = req.params.imageDirectory
+    imageDirectory = req.query.imageDirectory
     res.sendFile(`C:/Users/Lucas/Desktop/Projeto Facul/Projeto 1/Software/photos${imageDirectory}`)
 }
 
