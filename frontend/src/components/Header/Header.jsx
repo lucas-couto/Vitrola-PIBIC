@@ -11,6 +11,7 @@ import { search } from '../../store/actions/searchAction'
 import { artist } from '../../store/actions/artistAction'
 import { album } from '../../store/actions/albumAction'
 import { music } from '../../store/actions/musicAction'
+import API from '../../store/api'
 let informations
 let type
 let mbid
@@ -70,8 +71,8 @@ const Header = props => {
         return (
             <li key={information.mbid} data-mbid={information.mbid} data-type={information.type} onClick={handleInformation}>
                 <a href="#">
-                    <img src={process.env.PUBLIC_URL + information.image} 
-                    onError={e => {e.target.src = process.env.PUBLIC_URL + "./photos/artists/principalArtistIcon.png"}}/>
+                    <img src={`${API}/image?imageDirectory=${information.image}`} 
+                    onError={e => {e.target.src = `${API}/image?imageDirectory=/artist/principalArtistIcon.png`}}/>
                     <div>
                         <strong>{information.name}</strong>-<i>{type}</i>
                     </div>

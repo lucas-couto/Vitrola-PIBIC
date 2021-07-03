@@ -33,7 +33,7 @@ async function getAllAlbumInformation(paramsAlbumMbid) {
                 albumName = album.name
                 albumBiography = album.biography
                 albumReleaseDate = album.releaseDate
-                albumImage = album.directoryImage.replace('.', '')
+                albumImage = album.directoryImage
             } else {
                 exists = false
             }

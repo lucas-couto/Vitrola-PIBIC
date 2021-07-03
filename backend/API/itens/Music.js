@@ -26,7 +26,7 @@ async function getAllMusicInformation(paramsMusicMbid) {
                 musicMbid = music.music_mbid
                 musicName = music.name
                 musicBiography = music.biography
-                musicImage = music.directoryImage.replace('.', '')
+                musicImage = music.directoryImage
                 musicYoutubeUrl = music.urlYoutube
                 musicReleaseDate = music.releaseDate
             } else {

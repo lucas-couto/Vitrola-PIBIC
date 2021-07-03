@@ -33,7 +33,7 @@ async function getAllArtistInformation(paramsArtistMbid) {
                 artistMbid = artist.artist_mbid
                 artistName = artist.name
                 artistBiography = artist.biography
-                artistImage = artist.directoryImage.replace('.', '')
+                artistImage = artist.directoryImage
             } else {
                 exists = false
             }
@@ -83,7 +83,7 @@ async function getAllArtistInformation(paramsArtistMbid) {
             allAlbums.forEach(album => {
                 albumMbid = album.album_mbid
                 albumName = album.name
-                albumImage = album.directoryImage.replace('.', '')
+                albumImage = album.directoryImage
                 artistAlbums.push({ albumMbid, albumName, albumImage })
             })
         })
