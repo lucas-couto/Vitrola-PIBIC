@@ -24,7 +24,7 @@ let page
 async function downloadImageArtists(artistMbid, artistName, artistBiography, artistUrl, artistImageUrl, principalArtistMbid, withoutMbidParam) {
     correctArtistName = artistName.replace(/ /g, "_").replace(/[^0-9a-zA-Z]/g, '')
     artistDirectoryImage = `../../photos/artist/${correctArtistName}.jpeg`
-    artistImageForFrontEnd = `./artist/${correctArtistName}.jpeg`
+    artistImageForFrontEnd = `/artist/${correctArtistName}.jpeg`
     await screenshotPuppeteer(artistImageUrl, artistDirectoryImage, 'artist')
     await putArtistDB(artistMbid, artistName, artistBiography, artistUrl, artistImageForFrontEnd, principalArtistMbid, withoutMbidParam)
 }
@@ -33,7 +33,7 @@ async function downloadImageArtists(artistMbid, artistName, artistBiography, art
 async function downloadImageAlbums(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageUrl, artistMbid, artistName, withoutMbidParam) {
     correctAlbumName = albumName.replace(/ /g, "_").replace(/[^0-9a-zA-Z]/g, '')
     albumImageDirectory = `../../photos/album/${correctAlbumName}.jpeg`
-    albumImageForFrontEnd = `./album/${correctAlbumName}.jpeg`
+    albumImageForFrontEnd = `/album/${correctAlbumName}.jpeg`
     await screenshotPuppeteer(albumImageUrl, albumImageDirectory, 'album')
     await putAlbumsDB(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageForFrontEnd, artistMbid, artistName, withoutMbidParam)
 }
@@ -46,7 +46,7 @@ async function downloadImageMusics(musicMbid, musicName, musicBiography, musicYo
         correctMusicName = correctMusicName.replace("/", "_")
     musicGenre = ''
     musicImageDirectory = `../../photos/music/${correctMusicName}.jpeg`
-    musicImageForFrontEnd = `./music/${correctMusicName}.jpeg`
+    musicImageForFrontEnd = `/music/${correctMusicName}.jpeg`
     musicGenres.forEach(genre => {
         musicGenre = musicGenre + ` ${genre}`
     });
