@@ -49,7 +49,7 @@ const Header = props => {
     const handleSearch = async () => {
         if(inputValue){
             setLoadingLoop('block')
-            await props.searchInformation(event.target.value)
+            await props.searchInformation(inputValue)
             setLoadingLoop('none')
             setShowResults(true)
         }else{
