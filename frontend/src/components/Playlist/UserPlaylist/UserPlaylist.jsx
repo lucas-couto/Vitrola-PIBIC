@@ -40,7 +40,7 @@ const UserPlaylist = props => {
                         <li data-mbid={music.musicMbid} data-name={music.musicName} data-albumname={music.albumName} key={music.musicMbid}>
                             <img
                                 className="musicImage"
-                                src={`${API}/image?imageDirectory=${music.musicImage}`}
+                                src={`${API}/image?imageDirectory=${music.musicDirectoryImage}`}
                                 width="30" height="30"
                                 onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }}
                             />
@@ -66,7 +66,7 @@ const UserPlaylist = props => {
                 <li data-mbid={music.musicMbid} data-name={music.musicName} data-albumname={music.albumName} key={music.musicMbid}>
                     <img
                         className="musicImage"
-                        src={`${API}/image?imageDirectory=${music.musicImage}`}
+                        src={`${API}/image?imageDirectory=${music.musicDirectoryImage}`}
                         width="30" height="30"
                         onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }}
                     />
