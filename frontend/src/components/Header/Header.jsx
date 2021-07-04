@@ -23,7 +23,7 @@ const Header = props => {
     informations = []
     const { artist, album, music } = props
     const [showResults, setShowResults] = useState(false)
-    const [inputValue, setInputValue] = useState(false)
+    const [inputValue, setInputValue] = useState(null)
     const [loadingLoop, setLoadingLoop] = useState('none')
     if (artist)
         informations.push(artist)
@@ -35,7 +35,7 @@ const Header = props => {
         setInputValue(event.target.value)
     }
     const handleKeyDown = async event => {
-        if (event.key === 'Enter' && event.target.value) {
+        if (event.key === 'Enter') {
             if(inputValue){
                 setLoadingLoop('block')
                 await props.searchInformation(event.target.value)
