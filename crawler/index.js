@@ -8,7 +8,7 @@ const createTables = require('./database/createTables')
 async function Crawler() {
     // Verifica se as tabelas existem, se nao existirem elas sao criadas.
     await createTables
-    await Artist.startCrawler('china')
+    // await Artist.startCrawler('china')
     await Recommendations.startRecommendations()
 }
 Crawler()
