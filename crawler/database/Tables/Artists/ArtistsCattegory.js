@@ -76,16 +76,4 @@ async function putArtistDB(artistMbid, artistName, artistBiography, artistUrl, a
         await Similar.getSimilar(newArtistMbid || artistMbid, artistName)
 
 }
-async function ola(){
-    let sibis = 'ola'
-    existArtist = await Artists.findOne({where:{name:  'Interpolaaa', url: 'https://www.last.fm/music/Interpol'}})
-    console.log(existArtist)
-    newMbid = existArtist.dataValues.artist_mbid
-    newMbid = null
-    await ola2(newMbid || sibis)
-}
-async function ola2(Mbid){
-    console.log(Mbid)
-}
-ola()
 module.exports = { putArtistDB }

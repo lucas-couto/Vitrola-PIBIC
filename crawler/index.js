@@ -2,7 +2,7 @@
 /* O require importa: uma biblioteca, uma função de outro lugar, responsavel por todas as importaçoes */
 /* O module.exports é responsavel por exportar uma função.*/
 const Artist = require('./API/Artist')
-const Recommendations = require('./recommendations/Recommendations')
+const Recommendations = require('../recommendations/Recommendations')
 const createTables = require('./database/createTables')
 
 async function Crawler() {
@@ -11,4 +11,5 @@ async function Crawler() {
     // await Artist.startCrawler('china')
     await Recommendations.startRecommendations()
 }
+
 Crawler()

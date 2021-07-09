@@ -52,8 +52,6 @@ async function getArtistInfo(artistMbid, artistName, artistUrl) {
     Essa URL retorna mais informacoes sobre um determinado artista.
     Informacao adquirida: Biografia do artista.
     */
-   console.log(artistMbid)
-   console.log(artistName)
     await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtistName}&api_key=d3fa18ca96490032eea33ffb8bf42b6f&format=json`)
         .then(async res => {
             if (res.data.error)
