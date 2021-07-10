@@ -44,7 +44,6 @@ async function getTopAlbums(artistMbid, artistName) {
 
 async function allAlbums(artistMbid, artistName, correctAlbums, encodedArtistName) {
     for (let album of correctAlbums) {
-        encodedAlbumName = encodeURI(album.name)
         albumName = album.name
         await albumGetInfo(albumName, artistMbid, artistName, encodedArtistName, encodedAlbumName)
     }
@@ -55,6 +54,7 @@ Tem o objetivo de adquirir mais informacoes sobre um determinado album.
 Informacoes adquiridas: Mbid, URL, imagem e biografia do album.
 */
 async function albumGetInfo(albumName, artistMbid, artistName, encodedArtistName, encodedAlbumName) {
+    encodedAlbumName = encodeURI(albumName)
     await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=d3fa18ca96490032eea33ffb8bf42b6f&artist=${encodedArtistName}&album=${encodedAlbumName}&format=json`)
         .then(res => {
             if (res.data.error)

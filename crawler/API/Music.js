@@ -13,6 +13,7 @@ let musicBiography
 let musicTag
 let musicGenres = []
 let encodedArtistName
+let encodedAlbumName
 let encodedMusicName
 let albumTracks
 let error
@@ -23,7 +24,8 @@ async function getTopTracks(albumMbid, albumName, artistName) {
     Informacoes adquiridas: Um array de objetos com varias musicas.
     */
     encodedArtistName = encodeURI(artistName)
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=d3fa18ca96490032eea33ffb8bf42b6f&artist=${artistName}&album=${albumName}&autocorrect=1&format=json`)
+    encodedAlbumName = encodeURI(albumName)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=d3fa18ca96490032eea33ffb8bf42b6f&artist=${encodedArtistName}&album=${encodedAlbumName}&autocorrect=1&format=json`)
         .then(res => {
             if (res.data.error)
                 console.log(res.data)
@@ -67,6 +69,8 @@ async function trackGetInfo(musicName, musicUrl, albumMbid, artistName) {
     Informacoes adquiridas: Mbid, biografia, generos da musica.
     Em seguida a funcao da continuidade ao encadeamento.
     */
+   encodedArtistName = artistName
+   encodedMusicName = musicName
     await axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=d3fa18ca96490032eea33ffb8bf42b6f&artist=${encodedArtistName}&track=${encodedMusicName}&format=json`)
         .then(res => {
             if (res.data.error)

@@ -42,7 +42,6 @@ async function getSimilar(artistMbid, artistName) {
 }
 async function allSimilarArtist(artistMbid, correctSimilarArtists) {
     for (let similarArtist of correctSimilarArtists) {
-        encodedSimilarName = encodeURI(similarArtist.name)
         similarArtistName = similarArtist.name
         similarArtistUrl = similarArtist.url || null
         await getSimilarInfo(similarArtistName, similarArtistUrl, artistMbid)
@@ -54,6 +53,7 @@ Tem o objetivo de adquirir mais informacoes sobre o artista similar.
 Informacao adquirida: Biografia do artista similar.
 */
 async function getSimilarInfo(similarArtistName, similarArtistUrl, artistMbid) {
+    encodedSimilarName = encodeURI(similarArtistName)
     await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedSimilarName}&api_key=d3fa18ca96490032eea33ffb8bf42b6f&autocorrect=1&format=json`)
         .then(res => {
             if (res.data.error)
