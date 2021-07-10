@@ -2,10 +2,14 @@ const Musics = require('./Musics')
 const withoutMbid = require('../withoutMbid/withoutMbid')
 const { putWithoutMbidDB } = require('../withoutMbid/withoutMbidCattegory')
 const { putMusicRLDB } = require('../Relational_Tables/Albums_Musics/Albums_MusicsCattegory')
+const Recommendations = require('../../../../recommendations/Recommendations')
 
 let newMusicMbid
+let existMusic
 let hours
 let minutes
+let counter = 0
+let musicsArray = []
 // Colocar as informações no banco de dados.
 async function putMusicsDB(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicReleaseDate, musicImageDirectory, musicGenre, artistName, albumMbid, withoutMbidParam) {
     newMusicMbid = null
@@ -13,56 +17,58 @@ async function putMusicsDB(musicMbid, musicName, musicBiography, musicYoutubeUrl
     hours = data.getHours()
     minutes = data.getMinutes()
     if (withoutMbidParam) {
-        await withoutMbid.findOne({ where: { name: musicName, artistName: artistName, type: 'music' } })
-            .then(async music => {
-                if (music) {
-                    console.log('\x1b[31m%s\x1b[0m', `${hours}:${minutes} - Musica sem Mbid já cadastrado!`)
-                    newMusicMbid = music.newMbid
-                } else {
-                    await Musics.create({
-                        music_mbid: musicMbid,
-                        name: musicName,
-                        biography: musicBiography,
-                        urlYoutube: musicYoutubeUrl,
-                        releaseDate: musicReleaseDate,
-                        directoryImage: musicImageDirectory,
-                        genre: musicGenre
-                    }).then(() => {
-                        console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica sem Mbid cadastrada com sucesso!`)
-                    }).catch(e => {
-                        console.log(e)
-                    })
-                    await putWithoutMbidDB(musicMbid, musicName, artistName, 'music')
-                }
-            })
-            .catch(e => {
+        existMusic = await withoutMbid.findOne({ where: { name: musicName, artistName: artistName, type: 'music' } })
+        if (existMusic) {
+            console.log('\x1b[31m%s\x1b[0m', `${hours}:${minutes} - Musica sem Mbid já cadastrado!`)
+            newMusicMbid = existMusic.dataValues.newMbid
+        } else {
+            await Musics.create({
+                music_mbid: musicMbid,
+                name: musicName,
+                biography: musicBiography,
+                urlYoutube: musicYoutubeUrl,
+                releaseDate: musicReleaseDate,
+                directoryImage: musicImageDirectory,
+                genre: musicGenre
+            }).then(async () => {
+                console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica sem Mbid cadastrada com sucesso!`)
+                await get250music(musicMbid, musicGenre)
+            }).catch(e => {
                 console.log(e)
             })
+            await putWithoutMbidDB(musicMbid, musicName, artistName, 'music')
+        }
     } else {
-        await Musics.findOne({ where: { music_mbid: musicMbid } })
-            .then(async music => {
-                if (music) {
-                    console.log('\x1b[31m%s\x1b[0m', `${hours}:${minutes} - Musica ja cadastrada!`)
-                } else {
-                    await Musics.create({
-                        music_mbid: musicMbid,
-                        name: musicName,
-                        biography: musicBiography,
-                        urlYoutube: musicYoutubeUrl,
-                        releaseDate: musicReleaseDate,
-                        directoryImage: musicImageDirectory,
-                        genre: musicGenre
-                    }).then(() => {
-                        console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica cadastrada com sucesso!`)
-                    }).catch(e => {
-                        console.log(e)
-                    })
-                }
+        existMusic = await Musics.findOne({ where: { music_mbid: musicMbid } })
+        if (existMusic)
+            console.log('\x1b[31m%s\x1b[0m', `${hours}:${minutes} - Musica ja cadastrada!`)
+        else {
+            await Musics.create({
+                music_mbid: musicMbid,
+                name: musicName,
+                biography: musicBiography,
+                urlYoutube: musicYoutubeUrl,
+                releaseDate: musicReleaseDate,
+                directoryImage: musicImageDirectory,
+                genre: musicGenre
+            }).then(async () => {
+                console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica cadastrada com sucesso!`)
+                await get250music(musicMbid, musicGenre)
+            }).catch(e => {
+                console.log(e)
             })
-            .catch(e => {
-                console.log(`Erro(putMusicsDB): ${e}`)
-            })
+        }
     }
     await putMusicRLDB(albumMbid, newMusicMbid || musicMbid)
+}
+
+async function get250music(musicMbid, musicGenre) {
+    counter++
+    musicsArray.push({ musicMbid, musicGenre })
+    if (counter == 250) {
+        await Recommendations.startRecommendations(musicsArray)
+        musicsArray.length = 0
+        counter = 0
+    }
 }
 module.exports = { putMusicsDB }

@@ -3,14 +3,14 @@ const Musics_Similar = require('./Musics_Similar')
 let data
 let hours
 let minutes
-let music
+let existMusics_Similar
 // Colocar as informações no banco de dados.
 async function putSimilarMusicRLDB(principalMusicMbid, secondaryMusicMbid, similarityScore) {
     data = new Date()
     hours = data.getHours()
     minutes = data.getMinutes()
-    musics_similar = await Musics_Similar.findOne({ where: { music_mbid: principalMusicMbid, similarMusic_mbid: secondaryMusicMbid } })
-    if (musics_similar)
+    existMusics_Similar = await Musics_Similar.findOne({ where: { music_mbid: principalMusicMbid, similarMusic_mbid: secondaryMusicMbid } })
+    if (existMusics_Similar)
         console.log('\x1b[31m%s\x1b[0m', `${hours}:${minutes} - Musica Similar RLDB ja cadastrado!`)
     else
         await Musics_Similar.create({
