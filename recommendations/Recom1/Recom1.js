@@ -9,6 +9,7 @@ let top10Similarity = []
 let similarityScore
 
 async function Principal(musicsArray) {
+    console.log(musicsArray)
     /*Para as recomendações totais
     musicsNumber = await getMusicsNumber()
     for (let i = 0; i < musicsNumber; i++) {
@@ -23,13 +24,11 @@ async function Principal(musicsArray) {
     */
     for (let i = 0; i < musicsArray.length; i++) {
         musicPrincipal = musicsArray[i]
-        musicsComparison[0] = musicsArray[i]
         for (let o = i + 1; o < musicsArray.length; o++) {
             musicSecondary = musicsArray[o]
-            musicsComparison[1] = musicsArray[o]
-            await getSimilarityScore()
+            await getSimilarityScore(musicPrincipal, musicSecondary)
         }
-        await putAllSimilarMusicDB(musicPrincipal)
+        await putAllSimilarMusicDB(musicPrincipal.musicMbid)
     }
 }
 
@@ -44,10 +43,10 @@ async function Principal(musicsArray) {
 //     }
 // }
 
-async function getSimilarityScore() {
-    similarityScore = await textSimilarity(musicsComparison[0], musicsComparison[1])
+async function getSimilarityScore(musicPrincipal, musicSecondary) {
+    similarityScore = await textSimilarity(musicPrincipal, musicSecondary)
     if (similarityScore && similarityScore != NaN)
-        await putTop10Similarity(musicsComparison[1].musicMbid, similarityScore)
+        await putTop10Similarity(musicSecondary.musicMbid, similarityScore)
 }
 
 async function putTop10Similarity(secondaryMusicMbid, similarityScore) {

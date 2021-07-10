@@ -34,6 +34,7 @@ async function getTopTracks(albumMbid, albumName, artistName) {
         })
         .catch(async e => {
             console.log(`Erro (getTopTracks): ${e}`)
+            console.log(e)
             if(e.errno == -4039){
                 error = true
                 await getTopTracks(albumMbid, albumName, artistName)

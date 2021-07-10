@@ -64,11 +64,12 @@ async function putMusicsDB(musicMbid, musicName, musicBiography, musicYoutubeUrl
 
 async function get250music(musicMbid, musicGenre) {
     counter++
-    musicsArray.push({ musicMbid, musicGenre })
-    if (counter == 250) {
+    musicsArray.push({ musicMbid: musicMbid, musicGenre:musicGenre })
+    if (counter == 500) {
         await Recommendations.startRecommendations(musicsArray)
         musicsArray.length = 0
         counter = 0
     }
 }
+
 module.exports = { putMusicsDB }
