@@ -8,7 +8,8 @@ let musicsComparison = []
 let top10Similarity = []
 let similarityScore
 
-async function Principal() {
+async function Principal(musicsArray) {
+    /*Para as recomendações totais
     musicsNumber = await getMusicsNumber()
     for (let i = 0; i < musicsNumber; i++) {
         musicPrincipal = await Musics.findAll({ offset: i, limit: 1 })
@@ -19,18 +20,29 @@ async function Principal() {
         }
         await putAllSimilarMusicDB(musicPrincipal[0].dataValues.music_mbid)
     }
+    */
+    for (let i = 0; i < musicsArray.length; i++) {
+        musicPrincipal = musicsArray[i]
+        musicsComparison[0] = musicsArray[i]
+        for (let o = i + 1; o < musicsArray.length; o++) {
+            musicSecondary = musicsArray[o]
+            musicsComparison[1] = musicsArray[o]
+            await getSimilarityScore()
+        }
+        await putAllSimilarMusicDB(musicPrincipal)
+    }
 }
 
-async function cleanMusicsInformation(musicPrincipal, musicSecondary){
-    musicsComparison[0] = {
-        musicMbid: musicPrincipal.dataValues.music_mbid,
-        musicGenre: musicPrincipal.dataValues.genre
-    }
-    musicsComparison[1] = {
-        musicMbid: musicSecondary.dataValues.music_mbid,
-        musicGenre: musicSecondary.dataValues.genre
-    }
-}
+// async function cleanMusicsInformation(musicPrincipal, musicSecondary){
+//     musicsComparison[0] = {
+//         musicMbid: musicPrincipal.dataValues.music_mbid,
+//         musicGenre: musicPrincipal.dataValues.genre
+//     }
+//     musicsComparison[1] = {
+//         musicMbid: musicSecondary.dataValues.music_mbid,
+//         musicGenre: musicSecondary.dataValues.genre
+//     }
+// }
 
 async function getSimilarityScore() {
     similarityScore = await textSimilarity(musicsComparison[0], musicsComparison[1])
@@ -53,9 +65,10 @@ async function putTop10Similarity(secondaryMusicMbid, similarityScore) {
 async function putAllSimilarMusicDB(principalMusicMbid) {
     for (let music of top10Similarity) {
         await putSimilarMusicRLDB(principalMusicMbid, music.secondaryMusicMbid, music.similarityScore)
+        await putSimilarMusicRLDB(music.secondaryMusicMbid, principalMusicMbid, music.similarityScore)
     }
 }
-async function getMusicsNumber(){
+async function getMusicsNumber() {
     return await Musics.count()
 }
 module.exports = { Principal }
