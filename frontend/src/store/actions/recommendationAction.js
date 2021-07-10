@@ -10,6 +10,7 @@ export async function recommendation() {
             allMusicsMbid.push(playlist[i].musicMbid)
         }
         allMusicsMbid = JSON.stringify(allMusicsMbid)
+        allMusicsMbid = encodeURI(allMusicsMbid)
         return await axios.get(`${API}/music/recommendation/${allMusicsMbid}`)
             .then(res => {
                 return {
