@@ -23,6 +23,6 @@ Musics_Similar.belongsTo(Musics, {foreignKey: 'similarMusic_mbid', as:'similarMu
 
 
 //Metodo para gerar as tabelas de relação
-module.exports = connection.sync({force: true})
+module.exports = connection.sync()
 
 
