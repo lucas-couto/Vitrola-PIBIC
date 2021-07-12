@@ -9,7 +9,7 @@ import Footer from './components/Footer/Footer'
 const warning = () => {
   setTimeout(() => {
     if (window.confirm(`Olá Usuario! Você poderia preencher um formulario?`)){
-      window.open('https://forms.gle/9FccgDqzVVcREAfD8', '_blank');
+      window.open('https://forms.gle/iak5oEVswoWowRZw5', '_blank');
     }
   }, 120000)
 }
