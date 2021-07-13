@@ -20,6 +20,7 @@ let artistImage
 let similarArtists
 let similarArtistName
 let similarArtistMbid
+let similarArtistImage
 let artistAlbums
 let albumName
 let albumMbid
@@ -61,6 +62,7 @@ async function getAllArtistInformation(paramsArtistMbid) {
             allSimilarArtists.forEach(artist => {
                 similarArtistName = artist.name
                 similarArtistMbid = artist.artist_mbid
+                // similarArtistImage = artist.directoryImage
                 similarArtists.push({ similarArtistMbid, similarArtistName })
             })
         })

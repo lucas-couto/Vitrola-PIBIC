@@ -4,7 +4,6 @@ import './Graph.css'
 
 import { connect } from 'react-redux'
 import { artist } from '../../store/actions/artistAction'
-
 let options = {
     autoResize: true,
     nodes: {
@@ -78,6 +77,7 @@ let similarArtistMbid
 let id
 const Graph1 = props => {
     const { artistName, artistMbid, similarArtists } = props
+    const [network, setNetwork] = useState(null)
     const [Nodes, setNodes] = useState(null)
     const [Edges, setEdges] = useState(null)
     const [show, setShow] = useState(false)
@@ -90,7 +90,22 @@ const Graph1 = props => {
         nodes: Nodes,
         edges: Edges
     };
-
+        if(network){
+            network.once("beforeDrawing", function () {
+                network.focus(1, {
+                  scale: 5,
+                });
+              });
+              network.once("afterDrawing", function () {
+                network.fit({
+                  animation: {
+                    duration: 3000,
+                    easingFunction: 'linear',
+                  },
+                });
+              });
+            setNetwork(null)
+        }
     events = {
         doubleClick: function (event) {
             indexNode = event.nodes[0]
@@ -110,7 +125,6 @@ const Graph1 = props => {
             </div>
         )
     }
-
     function showGraph() {
         return (
             <Graph
@@ -118,6 +132,7 @@ const Graph1 = props => {
                 options={options}
                 style={style}
                 events={events}
+                getNetwork={e => {setNetwork(e)}}
             />
         )
     }
