@@ -188,7 +188,9 @@ const Musics = props => {
         setMusicsFound(false)
     }, [])
     useEffect(() => {
-        setMusicsFound(true)
+        setTimeout(() =>{
+            setMusicsFound(true)
+        }, 0.7 * 1000)
     }, [List])
     return (
         <div className="musicList">
