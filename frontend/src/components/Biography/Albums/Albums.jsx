@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Albums.css'
 
 import Musics from './Musics/Musics'
@@ -8,14 +8,16 @@ import API from '../../../store/api'
 let name
 let mbid
 const Albums = props => {
-    const { artistAlbums, albumName, albumMbid, albumBiography, albumImage, albumMusics } = props
+    const { artistMbid, artistAlbums, albumName, albumMbid, albumBiography, albumImage, albumMusics } = props
     const [album_Name, setAlbumName] = useState('block')
     const [displayAlbumList, setDisplayAlbumList] = useState('block')
     const [displayFeaturedAlbum, setDisplayFeaturedAlbum] = useState('none')
     const [showAlbumBiography, setShowAlbumBiography] = useState(false)
     const [showAlbumMusics, setShowAlbumMusics] = useState(false)
     const [showFeaturedAlbum, setShowFeaturedAlbum] = useState(false)
-
+    useEffect(() =>{
+        setShowAlbumMusics(false)
+    }, [artistMbid])
     const List = artistAlbums.map(album => {
         if (album.albumMbid === albumMbid) {
             return (
@@ -115,6 +117,7 @@ const Albums = props => {
 
 const mapStateToProps = state => {
     return {
+        artistMbid: state.artist.artistMbid,
         artistAlbums: state.artist.artistAlbums,
         albumMbid: state.album.albumMbid,
         albumName: state.album.albumName,

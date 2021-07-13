@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Biography.css'
 import Albums from './Albums/Albums'
 import { connect } from 'react-redux'
@@ -12,7 +12,9 @@ const Biography = props => {
     const [displayButtonBiography, setDisplayButtonBiography] = useState('none')
     const [displayButtonAlbum, setDisplayButtonAlbum] = useState('block')
     const [displayAlbums, setDisplayAlbums] = useState(false)
-
+    useEffect(() =>{
+        handleClickBtnBiography()
+    }, [artistMbid])
     function handleClickBtnAlbums() {
         if (displayImage === 'flex' && displayTextBiography === 'inline') {
             setDisplayButtonAlbum('none')
