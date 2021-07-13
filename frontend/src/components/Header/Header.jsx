@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Header.css'
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -15,44 +15,43 @@ import API from '../../store/api'
 let informations
 let type
 let mbid
-let playlist = localStorage.getItem('playlistMusics')
-if (!playlist)
-    localStorage.setItem('playlistMusics', JSON.stringify([]))
 const Header = props => {
     const cellPhone = useMediaQuery('(max-width:575.98px)');
     informations = []
-    const { artist, album, music } = props
+    const { artist, album, music, notFound } = props
     const [showResults, setShowResults] = useState(false)
     const [inputValue, setInputValue] = useState(null)
     const [loadingLoop, setLoadingLoop] = useState('none')
     if (artist)
         informations.push(artist)
-    if (album)
+    else if (album)
         informations.push(album)
-    if (music)
+    else if (music)
         informations.push(music)
+    else if(notFound)
+        alert('Informação inexistente')
     const setValue = async (event) => {
         setInputValue(event.target.value)
     }
     const handleKeyDown = async event => {
         if (event.key === 'Enter') {
-            if(inputValue){
+            if (inputValue) {
                 setLoadingLoop('block')
                 await props.searchInformation(event.target.value)
                 setLoadingLoop('none')
                 setShowResults(true)
-            }else{
+            } else {
                 alert('Os dados de pesquisa estão vazios!')
             }
         }
     }
     const handleSearch = async () => {
-        if(inputValue){
+        if (inputValue) {
             setLoadingLoop('block')
             await props.searchInformation(inputValue)
             setLoadingLoop('none')
             setShowResults(true)
-        }else{
+        } else {
             alert('Os dados de pesquisa estão vazios!')
         }
     }
@@ -78,8 +77,8 @@ const Header = props => {
         return (
             <li key={information.mbid} data-mbid={information.mbid} data-type={information.type} onClick={handleInformation}>
                 <a href="#">
-                    <img src={`${API}/image?imageDirectory=${information.image}`} 
-                    onError={e => {e.target.src = `${API}/image?imageDirectory=/artist/principalArtistIcon.png`}}/>
+                    <img src={`${API}/image?imageDirectory=${information.image}`}
+                        onError={e => { e.target.src = `${API}/image?imageDirectory=/artist/principalArtistIcon.png` }} />
                     <div>
                         <strong>{information.name}</strong>-<i>{type}</i>
                     </div>
@@ -113,7 +112,8 @@ const mapStateToProps = state => {
     return {
         artist: state.search.artist,
         album: state.search.album,
-        music: state.search.music
+        music: state.search.music,
+        notFound: state.search.notFound
     }
 }
 

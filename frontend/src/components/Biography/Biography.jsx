@@ -15,6 +15,8 @@ const Biography = props => {
     useEffect(() =>{
         handleClickBtnBiography()
     }, [artistMbid])
+
+    // Desaparece a biografia do artista e aparece os albuns do mesmo.
     function handleClickBtnAlbums() {
         if (displayImage === 'flex' && displayTextBiography === 'inline') {
             setDisplayButtonAlbum('none')
@@ -25,6 +27,7 @@ const Biography = props => {
             setDisplayAlbums(true)
         }
     }
+    //Desaparece os albuns do artista e aparece a biografia do mesmo.
     function handleClickBtnBiography() {
         if (displayImage === 'none' && displayTextBiography === 'none') {
             setDisplayAlbums(false)
@@ -65,7 +68,8 @@ const Biography = props => {
                 <button className="albumsBiography" onClick={handleClickBtnAlbums} style={{ display: displayButtonAlbum }} disabled={artistMbid ? false : true}><span>Albums</span></button>
             </div>
             {displayAlbums ? (
-                <Albums />) : null}
+                <Albums />
+            ) : null}
         </div>
     )
 }

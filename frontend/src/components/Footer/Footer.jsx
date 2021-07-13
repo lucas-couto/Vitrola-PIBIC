@@ -30,6 +30,9 @@ const Footer = props => {
     const [progress, setProgress] = useState(false)
     const [volume, setVolume] = useState(0.5)
     const [muttedVolume, setMuttedVolume] = useState(false)
+
+
+    //Animações para o player
     const handleProgress = state => { setProgress(state.played) }
     const handleDuration = seconds => { setDuration(seconds) }
     const handleVolumeChange = e => { setVolume(parseFloat(e.target.value)) }
@@ -158,13 +161,16 @@ const Footer = props => {
             )
         }
     }
-    const nextMusic = () => {
+
+    // Tocar a proxima musica
+    const handleNextMusic = () => {
         if(musicArray && musicArray.length > 1){
             index = actualMusic(musicArray, musicMbid)
             props.playAMusic(musicArray[index + 1].musicYoutubeUrl, musicArray[index + 1].musicMbid, musicArray[index + 1].musicName, albumName, musicArray)
         }
     }
-    const backMusic = () => {
+    // Tocar a musica anterior
+    const handleBackMusic = () => {
         index = actualMusic(musicArray, musicMbid)
         props.playAMusic(musicArray[index - 1].musicYoutubeUrl, musicArray[index - 1].musicMbid, musicArray[index - 1].musicName, albumName, musicArray)
     }
@@ -173,13 +179,13 @@ const Footer = props => {
         <React.Fragment>
             <div className="Footer">
                 <div className="playPause">
-                    <IconButton size="small" disabled={!musicYoutubeUrl} onClick={backMusic}>
+                    <IconButton size="small" disabled={!musicYoutubeUrl} onClick={handleBackMusic}>
                         {animatedBack()}
                     </IconButton>
                     <IconButton disabled={!musicYoutubeUrl} onClick={() => playingMusic ? props.stopAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, musicArray) : props.playAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, musicArray)}>
                         {animatedPlayPause()}
                     </IconButton>
-                    <IconButton size="small" disabled={!musicYoutubeUrl} onClick={nextMusic}>
+                    <IconButton size="small" disabled={!musicYoutubeUrl} onClick={handleNextMusic}>
                         {animatedNext()}
                     </IconButton>
                 </div>
@@ -211,7 +217,7 @@ const Footer = props => {
                     onDuration={handleDuration}
                     volume={volume}
                     muted={muttedVolume}
-                    onEnded={nextMusic}
+                    onEnded={handleNextMusic}
                 />
             </div>
         </React.Fragment>

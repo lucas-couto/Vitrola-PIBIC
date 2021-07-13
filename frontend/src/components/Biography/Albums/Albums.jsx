@@ -15,13 +15,10 @@ const Albums = props => {
     const [showAlbumBiography, setShowAlbumBiography] = useState(false)
     const [showAlbumMusics, setShowAlbumMusics] = useState(false)
     const [showFeaturedAlbum, setShowFeaturedAlbum] = useState(false)
-    useEffect(() =>{
-        setShowAlbumMusics(false)
-    }, [artistMbid])
     const List = artistAlbums.map(album => {
         if (album.albumMbid === albumMbid) {
             return (
-                <div className="featuredAlbum">
+                <div className="featuredAlbum" key={album.albumMbid}>
                     <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                         <a href="#">
                             <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50" 
@@ -43,13 +40,15 @@ const Albums = props => {
         )
     })
 
-    function handleClickAlbumBiography() {
-        setShowAlbumBiography(!showAlbumBiography);
-    }
+    // function handleClickAlbumBiography() {
+    //     setShowAlbumBiography(!showAlbumBiography);
+    // }
+    // Aparece as musicas de um determinado album.
     function handleClickAlbumMusics() {
         setShowAlbumMusics(!showAlbumMusics);
     }
 
+    // Destaca um album especifico
     function handleClickFeaturedAlbum(e) {
         name = e.currentTarget.getAttribute("data-name")
         mbid = e.currentTarget.getAttribute("data-mbid")
@@ -59,7 +58,7 @@ const Albums = props => {
         setDisplayFeaturedAlbum('flex')
         setDisplayAlbumList('none')
     }
-
+    // Apresenta a lista de albuns
     function handleClickAlbumList() {
         setShowFeaturedAlbum(false)
         setDisplayFeaturedAlbum('none')

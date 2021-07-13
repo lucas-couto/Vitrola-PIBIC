@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Graph from 'vis-react';
 import './Graph.css'
 
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { artist } from '../../store/actions/artistAction'
 
@@ -123,6 +122,7 @@ const Graph1 = props => {
         )
     }
 
+    // Logica para mostrar, o relacionamento de artistas
     function searchMainSimilarArtist() {
         allNodes = []
         allEdges = []
@@ -167,12 +167,11 @@ const Graph1 = props => {
     //         })
     //     }
     // }
-    function searchSimilarsNivel3(similarArtistMbid, id) {
+    // function searchSimilarsNivel3(similarArtistMbid, id) {
 
-        setNodes(allNodes)
-        setEdges(allEdges)
-    }
-
+    //     setNodes(allNodes)
+    //     setEdges(allEdges)
+    // }
     return (
         <div className="Graph">
             {show ? (showGraph()) : (wellCome())}

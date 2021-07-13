@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Logica para apresentar a duração da musica.
 export default function Duration ({ className, seconds }) {
   return (
     <time dateTime={`P${Math.round(seconds)}S`} className={className}>

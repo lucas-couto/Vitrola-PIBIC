@@ -29,7 +29,8 @@ async function searchAllInformations(name) {
                 }
             }else{
                 return{
-                    title: 'NotFound'
+                    title: 'NotFound',
+                    notFound: true
                 }
             }
         }

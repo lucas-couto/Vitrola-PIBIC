@@ -14,7 +14,7 @@
     margin: 5px;
     padding: 0;
     list-style-type: none;
-    max-height: 43vh;
+    max-height: 35vh;
 }
 .musicList li{
     display: grid;

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Musics.css'
 
+import { Ring } from 'react-spinners-css';
 import IconButton from '@material-ui/core/IconButton';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
@@ -18,19 +19,15 @@ let musicYoutubeUrl
 let musicImage
 
 const Musics = props => {
-    const ifMusicExists = (file) => {
-        try {
-            return require(`${file}`)
-        } catch (e) {
-            return false
-        }
-    }
     const { artistName, artistMbid, albumMusics, albumName, albumMbid, playingMusic, playingMusicName } = props
     const cellPhone = useMediaQuery('(max-width:575.98px)');
     const small = useMediaQuery('(min-width: 576px) and (max-width: 767.98px)');
     const medium = useMediaQuery('(min-width: 768px) and (max-width: 991.98px)');
     const large = useMediaQuery('(min-width: 992px) and (max-width: 1366px)');
     const veryLarge = useMediaQuery('(min-width: 1367px)');
+    const [musicsFound, setMusicsFound] = useState(false)
+
+    // Adicionar uma musica na playlist.
     const handleAddPlaylist = e => {
         musicName = e.currentTarget.getAttribute("data-name")
         musicMbid = e.currentTarget.getAttribute("data-mbid")
@@ -40,6 +37,7 @@ const Musics = props => {
         props.recommendationAction()
     }
 
+    // Logica do album em destaque
     if (props.featuredMusic) {
         let firstElement = albumMusics[0]
         for (let i = 0; i < albumMusics.length; i++) {
@@ -50,6 +48,7 @@ const Musics = props => {
             }
         }
     }
+    // Icones responsivos
     function responsiveIcon() {
         if (cellPhone || small) {
             return (
@@ -69,12 +68,14 @@ const Musics = props => {
             )
         }
     }
+    // Tocar o som da musica
     function handlePlayMusic(e) {
         musicYoutubeUrl = e.currentTarget.getAttribute("data-urlyoutube")
         musicMbid = e.currentTarget.getAttribute("data-mbid")
         musicName = e.currentTarget.getAttribute("data-name")
         props.playAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, albumMusics)
     }
+    // Pausar o som da musica.
     function handleStopMusic(e) {
         musicYoutubeUrl = e.currentTarget.getAttribute("data-urlyoutube")
         musicMbid = e.currentTarget.getAttribute("data-mbid")
@@ -82,7 +83,7 @@ const Musics = props => {
         props.stopAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, albumMusics)
     }
 
-
+    // Animação do play e pause.
     function animatedPlayPause(musicMbid, musicName, urlYoutube, albumName) {
         if (playingMusic && playingMusicName == musicName) {
             if (cellPhone || small) {
@@ -138,7 +139,6 @@ const Musics = props => {
             }
         }
     }
-
     const List = albumMusics.map(music => {
         if (music.musicMbid === props.featuredMusic) {
             return (
@@ -184,24 +184,24 @@ const Musics = props => {
             )
         }
     })
-
-    function musicBiography() {
-        return (
-            <div className="musicBiography">
-                <p>
-                    Biografia da musica
-                </p>
-            </div>
-        )
-    }
-
-
-
+    useEffect(() => {
+        setMusicsFound(false)
+    }, [])
+    useEffect(() => {
+        setMusicsFound(true)
+    }, [List])
     return (
         <div className="musicList">
-            <ul>
-                {List}
-            </ul>
+            {musicsFound ? (
+                <ul>
+                    {List}
+                </ul>
+            ) : (
+                <Ring
+                    color="#fff"
+                    size={30}
+                />
+            )}
         </div>
     )
 }

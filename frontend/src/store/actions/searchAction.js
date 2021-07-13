@@ -5,12 +5,21 @@ const API = require('../api')
 export async function search(name) {
     return await axios.get(`${API}/search/${name}`)
         .then(res => {
-            return{
-                type: 'SEARCH',
-                payload: {
-                    artist: res.data.artist,
-                    album: res.data.album,
-                    music: res.data.music
+            if(res.data.artist || res.data.album || res.data.music){
+                return{
+                    type: 'SEARCH',
+                    payload: {
+                        artist: res.data.artist,
+                        album: res.data.album,
+                        music: res.data.music
+                    }
+                }
+            }else{
+                return{
+                    type: 'SEARCH',
+                    payload: {
+                        notFound: true
+                    }
                 }
             }
         })
