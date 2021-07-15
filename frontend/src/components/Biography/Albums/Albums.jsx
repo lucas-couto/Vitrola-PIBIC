@@ -43,6 +43,7 @@ const Albums = props => {
     // function handleClickAlbumBiography() {
     //     setShowAlbumBiography(!showAlbumBiography);
     // }
+
     // Aparece as musicas de um determinado album.
     function handleClickAlbumMusics() {
         setShowAlbumMusics(!showAlbumMusics);
@@ -86,7 +87,7 @@ const Albums = props => {
                             </div>
                         </div> */}
                         <div>
-                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={albumMusics ? false : true}>Musicas do album</button>
+                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics}>Musicas do album</button>
                             <div className="Musics">
                                 {showAlbumMusics ? (
                                     <div className="albumMusics" style={{ backgroundColor: '#9C9C9C' }}>

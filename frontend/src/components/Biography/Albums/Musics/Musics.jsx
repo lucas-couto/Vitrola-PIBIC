@@ -17,7 +17,6 @@ let musicName
 let musicMbid
 let musicYoutubeUrl
 let musicImage
-
 const Musics = props => {
     const { artistName, artistMbid, albumMusics, albumName, albumMbid, playingMusic, playingMusicName } = props
     const cellPhone = useMediaQuery('(max-width:575.98px)');
