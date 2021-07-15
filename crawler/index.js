@@ -5,10 +5,11 @@ const Artist = require('./API/Artist')
 const Recommendations = require('../recommendations/Recommendations')
 const createTables = require('./database/createTables')
 
+let country = 'brazil'
 async function Crawler() {
     // Verifica se as tabelas existem, se nao existirem elas sao criadas.
     await createTables
-    await Artist.startCrawler('brazil')
+    await Artist.startCrawler(country)
 }
 
 Crawler()

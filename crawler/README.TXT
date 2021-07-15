@@ -49,3 +49,7 @@ Durante a instalação vai ter uma etapa onde devemos colocar a opção 'ADD TO 
 Depois de tudo instalado, entramos no diretório da pasta ./consumoAPI no CMD ou Terminal do seu sistema operacional e utilizar o comando: npm install, para instalar as dependencias necessarias.
 Depois de instalar todas as dependencias, digite o comando: npm start, para iniciar o processo de preencher o banco de dados.
 Caso queira completar, utilizar essa aplicação, recomendo que rode o arquivo de 6 em 6 meses, para completar com novos artistas e musicas.
+----------------------------------------------------------------
+Recomendações do desenvolvedor:
+    Para cadastrar os artistas de varios ao mesmo tempo, eu criaria varias instancias de paises diferentes.
+    Assim o sistema irá se completar mais rapidamente!

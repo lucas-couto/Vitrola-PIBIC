@@ -4,7 +4,7 @@ const axios = require('axios')
 // Importando as funções de outros arquivos.
 const { getUrlYoutube } = require('./adjusts/urlYoutube')
 const { createNewMbid } = require('./adjusts/newMbid')
-
+const { APIkey } = require('../.env')
 // Declarando variaveis.
 let musicName
 let musicUrl
@@ -25,7 +25,7 @@ async function getTopTracks(albumMbid, albumName, artistName) {
     */
     encodedArtistName = encodeURI(artistName)
     encodedAlbumName = encodeURI(albumName)
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=d3fa18ca96490032eea33ffb8bf42b6f&artist=${encodedArtistName}&album=${encodedAlbumName}&autocorrect=1&format=json`)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${APIkey}&artist=${encodedArtistName}&album=${encodedAlbumName}&autocorrect=1&format=json`)
         .then(res => {
             if (res.data.error)
                 console.log(res.data)
@@ -35,7 +35,7 @@ async function getTopTracks(albumMbid, albumName, artistName) {
         .catch(async e => {
             console.log(`Erro (getTopTracks): ${e}`)
             console.log(e)
-            if(e.errno == -4039){
+            if (e.errno == -4039) {
                 error = true
                 await getTopTracks(albumMbid, albumName, artistName)
             }
@@ -70,9 +70,9 @@ async function trackGetInfo(musicName, musicUrl, albumMbid, artistName) {
     Informacoes adquiridas: Mbid, biografia, generos da musica.
     Em seguida a funcao da continuidade ao encadeamento.
     */
-   encodedArtistName = artistName
-   encodedMusicName = musicName
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=d3fa18ca96490032eea33ffb8bf42b6f&artist=${encodedArtistName}&track=${encodedMusicName}&format=json`)
+    encodedArtistName = artistName
+    encodedMusicName = musicName
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${APIkey}&artist=${encodedArtistName}&track=${encodedMusicName}&format=json`)
         .then(res => {
             if (res.data.error)
                 console.log(res.data)
@@ -95,7 +95,7 @@ async function trackGetInfo(musicName, musicUrl, albumMbid, artistName) {
         })
         .catch(async e => {
             console.log(`Erro (trackGetInfo): ${e}`)
-            if(e.errno == -4039){
+            if (e.errno == -4039) {
                 error = true
                 await trackGetInfo(musicName, musicUrl, albumMbid, artistName)
             }

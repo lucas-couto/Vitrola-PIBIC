@@ -4,7 +4,7 @@ const axios = require('axios')
 // Importando as funções de outros arquivos.
 const { ifAlbumExist } = require('./adjusts/ifAlbumExist')
 const { createNewMbid } = require('./adjusts/newMbid')
-
+const { APIkey } = require('../.env')
 // Declarando variaveis.
 let correctAlbums
 let albumTracks
@@ -23,7 +23,7 @@ async function getTopAlbums(artistMbid, artistName) {
     A informacao adquirida e: Um array de objetos com os albuns populares de um artista.
     */
     encodedArtistName = encodeURI(artistName)
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${encodedArtistName}&api_key=d3fa18ca96490032eea33ffb8bf42b6f&format=json`)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${encodedArtistName}&api_key=${APIkey}&format=json`)
         .then(res => {
             if (res.data.error)
                 console.log(res.data)
@@ -32,7 +32,7 @@ async function getTopAlbums(artistMbid, artistName) {
         })
         .catch(async e => {
             console.log(`Erro (getTopAlbums): ${e}`)
-            if(e.errno == -4039){
+            if (e.errno == -4039) {
                 error = true
                 await getTopAlbums(artistMbid, artistName)
             }
@@ -55,7 +55,7 @@ Informacoes adquiridas: Mbid, URL, imagem e biografia do album.
 */
 async function albumGetInfo(albumName, artistMbid, artistName, encodedArtistName, encodedAlbumName) {
     encodedAlbumName = encodeURI(albumName)
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=d3fa18ca96490032eea33ffb8bf42b6f&artist=${encodedArtistName}&album=${encodedAlbumName}&format=json`)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${APIkey}&artist=${encodedArtistName}&album=${encodedAlbumName}&format=json`)
         .then(res => {
             if (res.data.error)
                 console.log(res.data)
@@ -69,7 +69,7 @@ async function albumGetInfo(albumName, artistMbid, artistName, encodedArtistName
         })
         .catch(async e => {
             console.log(`Erro (albumGetInfo) ${e}`)
-            if(e.errno == -4039){
+            if (e.errno == -4039) {
                 error = true
                 await albumGetInfo(albumName, artistMbid, artistName, encodedArtistName, encodedAlbumName)
             }

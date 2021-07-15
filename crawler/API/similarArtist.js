@@ -2,6 +2,7 @@
 const axios = require('axios')
 
 // Importando as funções de outros arquivos.
+const { APIkey } = require('../.env')
 const { createNewMbid } = require('./adjusts/newMbid')
 const downloadImage = require('./adjusts/downloadImage')
 
@@ -15,6 +16,7 @@ let similarArtistUrlImage
 let encodedArtistName
 let encodedSimilarName
 let error = false
+let limitOfSimilarArtist = 50
 /*
 Essa função consome a URL: artist.getsimilar.
 Tem o objetivo de adquirir todos os similares de um determinado artista.
@@ -22,7 +24,7 @@ Informacoes adquiridas: Nome, mbid e URL do artista similar.
 */
 async function getSimilar(artistMbid, artistName) {
     encodedArtistName = encodeURI(artistName)
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${encodedArtistName}&limit=50&api_key=d3fa18ca96490032eea33ffb8bf42b6f&autocorrect=1&format=json`)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=${encodedArtistName}&limit=${limitOfSimilarArtist}&api_key=${APIkey}&autocorrect=1&format=json`)
         .then(res => {
             if (res.data.error)
                 console.log(res.data)
@@ -54,7 +56,7 @@ Informacao adquirida: Biografia do artista similar.
 */
 async function getSimilarInfo(similarArtistName, similarArtistUrl, artistMbid) {
     encodedSimilarName = encodeURI(similarArtistName)
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedSimilarName}&api_key=d3fa18ca96490032eea33ffb8bf42b6f&autocorrect=1&format=json`)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedSimilarName}&api_key=${APIkey}&autocorrect=1&format=json`)
         .then(res => {
             if (res.data.error)
                 console.log(res.data)

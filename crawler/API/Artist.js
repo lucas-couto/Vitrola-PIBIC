@@ -2,7 +2,8 @@
 const axios = require('axios')
 // Importando as funções de outros arquivos.
 const { createNewMbid } = require('./adjusts/newMbid')
-const downloadImage = require('./adjusts/downloadImage');
+const { APIkey } = require('../.env')
+const downloadImage = require('./adjusts/downloadImage')
 
 // Declarando variaveis.
 let correctTopArtists
@@ -13,13 +14,14 @@ let artistImageUrl
 let artistBiography
 let encodedArtistName
 let error = false
+let limitOfTopArtists = 1000
 async function startCrawler(country) {
     /*
     Essa função pega um pais.
     E em cada pais a URL retorna os artistas mais populares deste pais.
     Informacoes adquiridas: Um array de objetos, sendo cada objeto um artista popular de um determinado pais.
     */
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${country}&limit=1000&api_key=d3fa18ca96490032eea33ffb8bf42b6f&format=json`)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=${country}&limit=${limitOfTopArtists}&api_key=${APIkey}&format=json`)
         .then(async res => {
             if (res.data.error)
                 console.log(res.data)
@@ -28,7 +30,7 @@ async function startCrawler(country) {
         })
         .catch(async e => {
             console.log(`Erro (Start): ${e}`)
-            if(e.errno == -4039){
+            if (e.errno == -4039) {
                 error = true
                 await startCrawler(country)
             }
@@ -52,7 +54,7 @@ async function getArtistInfo(artistMbid, artistName, artistUrl) {
     Informacao adquirida: Biografia do artista.
     */
     encodedArtistName = encodeURI(artistName)
-    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtistName}&api_key=d3fa18ca96490032eea33ffb8bf42b6f&format=json`)
+    await axios.get(`http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtistName}&api_key=${APIkey}&format=json`)
         .then(async res => {
             if (res.data.error)
                 console.log(res.data)
@@ -62,7 +64,7 @@ async function getArtistInfo(artistMbid, artistName, artistUrl) {
         })
         .catch(async e => {
             console.log(`Erro (getArtistInfo): ${e}`)
-            if(e.errno == -4039){
+            if (e.errno == -4039) {
                 error = true
                 await getArtistInfo(artistMbid, artistName, artistUrl)
             }
