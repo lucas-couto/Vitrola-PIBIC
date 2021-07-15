@@ -32,7 +32,7 @@ async function getAllRecommendation(paramsPlaylistMusics) {
 }
 
 async function getTop10Musics(allSimilarMusicsMbid) {
-    for (let i = 0; i < allSimilarMusicsMbid.length; i++) {
+    for (let i = 0; i <= 10; i++) {
         musicInfo = await getAllMusicInformation(allSimilarMusicsMbid[i].mbid)
         musicMbid = musicInfo.music.musicMbid
         musicName = musicInfo.music.musicName
@@ -54,7 +54,7 @@ async function getTop10Musics(allSimilarMusicsMbid) {
 
 async function discardExistingPlaylistMusics(similarMusicMbid, allPlaylistMbidMusics) {
     for (let i = 0; i <= allPlaylistMbidMusics.length; i++) {
-        if (similarMusicMbid == allPlaylistMbidMusics[i])
+        if (similarMusicMbid == allPlaylistMbidMusics[i] || similarMusicMbid == allSimilarMusicsMbid[i].mbid)
             return true
     }
     return false
