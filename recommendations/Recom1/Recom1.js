@@ -9,7 +9,6 @@ let top10Similarity = []
 let similarityScore
 
 async function Principal(musicsArray) {
-    console.log(musicsArray)
     /*Para as recomendações totais
     musicsNumber = await getMusicsNumber()
     for (let i = 0; i < musicsNumber; i++) {
