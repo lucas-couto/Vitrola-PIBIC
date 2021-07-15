@@ -5,10 +5,15 @@
         Aluno: Lucas Silva Couto
 ----------------------------------------------------------------
 
-..\backend\API\itens\Album.js - Uma API que retorna os dados do Album pesquisado.
-..\backend\API\itens\Artist.js - Uma API que retorna os dados do Artista pesquisado.
-..\backend\API\itens\Music.js - Uma API que retorna os dados do Musica pesquisado.
+..\backend\API\itens\Album.js - Uma URL que retorna os dados do album pesquisado.
+..\backend\API\itens\Artist.js - Uma URL que retorna os dados do artista pesquisado.
+..\backend\API\itens\Music.js - Uma URL que retorna os dados do musica pesquisada.
+..\backend\API\itens\Image.js - Uma URL que retorna a imagem desejada.
+..\backend\API\itens\Music.js - Uma URL que retorna recomendações de musicas.
 
+..\backend\API\searchFunctions\albumSearch.js - Uma URL que retorna os dados de um album pesquisado na URL /search.
+..\backend\API\searchFunctions\artistSearch.js - Uma URL que retorna os dados de um artista pesquisado na URL /search.
+..\backend\API\searchFunctions\musicSearch.js - Uma URL que retorna os dados de um musica pesquisado na URL /search.
 ..\backend\API\Search.js - Responsavel por fazer a busca nas tabelas e retornar as informações necessarias em Json.
 
 ..\backend\Database\Albums\Albums.js - Conecta a tabela Albums.
