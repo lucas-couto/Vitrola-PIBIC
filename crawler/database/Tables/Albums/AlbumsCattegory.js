@@ -19,7 +19,7 @@ async function putAlbumsDB(albumMbid, albumName, albumBiography, albumUrl, album
     if (withoutMbidParam) {
         newAlbumMbid = await putAlbumWithoutMibdDB(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageDirectory, artistName)
     } else {
-        await putAlbumWithMibd(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageDirectory)
+        await putAlbumWithMibdDB(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageDirectory)
     }
     await putAlbumRLDB(artistMbid, newAlbumMbid || albumMbid)
     await Music.getTopTracks(newAlbumMbid || albumMbid, albumName, artistName)
@@ -47,7 +47,7 @@ async function putAlbumWithoutMibdDB(albumMbid, albumName, albumBiography, album
         return null
     }
 }
-async function putAlbumWithMibd(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageDirectory) {
+async function putAlbumWithMibdDB(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageDirectory) {
     existAlbum = await Albums.findOne({ where: { album_mbid: albumMbid } })
     if (existAlbum)
         console.log('\x1b[31m%s\x1b[0m', `${hours}:${minutes} - Album já cadastrado!`)

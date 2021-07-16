@@ -17,7 +17,7 @@ async function putMusicsDB(musicMbid, musicName, musicBiography, musicYoutubeUrl
     hours = data.getHours()
     minutes = data.getMinutes()
     if (withoutMbidParam) {
-        newMusicMbid = await putMusicWithoutMbid(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicReleaseDate, musicImageDirectory, musicGenre, artistName)
+        newMusicMbid = await putMusicWithoutMbidDB(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicReleaseDate, musicImageDirectory, musicGenre, artistName)
     } else {
         await putMusicWithMbid(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicReleaseDate, musicImageDirectory, musicGenre)
     }
@@ -34,7 +34,7 @@ async function get250music(musicMbid, musicGenre) {
     }
 }
 
-async function putMusicWithoutMbid(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicReleaseDate, musicImageDirectory, musicGenre, artistName) {
+async function putMusicWithoutMbidDB(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicReleaseDate, musicImageDirectory, musicGenre, artistName) {
     existMusic = await withoutMbid.findOne({ where: { name: musicName, artistName: artistName, type: 'music' } })
     if (existMusic) {
         console.log('\x1b[31m%s\x1b[0m', `${hours}:${minutes} - Musica sem Mbid já cadastrado!`)
