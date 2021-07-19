@@ -1,9 +1,9 @@
-const Music = require('../Music')
-const cheerio = require('cheerio')
-const rp = require('request-promise');
+const puppeteer = require('puppeteer')
 const releaseDate = require('./releaseDate')
 let musicUrl
 let counter
+let browser
+let page
 async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albumImageUrl, artistMbid, artistName, encodedArtistName, encodedAlbumName, albumTracks, withouMbidParam) {
     counter = 0
     if(Array.isArray(albumTracks)){
@@ -20,19 +20,11 @@ async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albu
 }
 
 async function ifMusicHaveYoutubeUrl(musicUrl) {
-    options = {
-        uri: musicUrl,
-        transform: function (body) {
-            return cheerio.load(body);
-        }
-    }
-    await rp(options)
-        .then($ => {
-            musicYoutubeUrl = $('a.play-this-track-playlink--youtube').attr('href')
-        })
-        .catch(e => {
-            console.log(e)
-        })
+    browser = await puppeteer.launch();
+    page = await browser.newPage();
+    await page.goto(musicUrl);
+    musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href)
+    await browser.close();
     if (musicYoutubeUrl)
         counter++
 }
