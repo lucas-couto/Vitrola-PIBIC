@@ -24,7 +24,7 @@ async function putMusicsDB(musicMbid, musicName, musicBiography, musicYoutubeUrl
     await putMusicRLDB(albumMbid, newMusicMbid || musicMbid)
 }
 
-async function get250music(musicMbid, musicGenre) {
+async function get500music(musicMbid, musicGenre) {
     counter++
     musicsArray.push({ musicMbid: musicMbid, musicGenre: musicGenre })
     if (counter == 500) {
@@ -50,7 +50,7 @@ async function putMusicWithoutMbidDB(musicMbid, musicName, musicBiography, music
             genre: musicGenre
         }).then(async () => {
             console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica sem Mbid cadastrada com sucesso!`)
-            await get250music(musicMbid, musicGenre)
+            await get500music(musicMbid, musicGenre)
         }).catch(e => {
             console.log(e)
         })
@@ -73,7 +73,7 @@ async function putMusicWithMbid(musicMbid, musicName, musicBiography, musicYoutu
             genre: musicGenre
         }).then(async () => {
             console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica cadastrada com sucesso!`)
-            await get250music(musicMbid, musicGenre)
+            await get500music(musicMbid, musicGenre)
         }).catch(e => {
             console.log(e)
         })
