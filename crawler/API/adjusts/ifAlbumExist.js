@@ -23,7 +23,7 @@ async function ifMusicHaveYoutubeUrl(musicUrl) {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto(musicUrl);
-    musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href)
+    musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href || null)
     await browser.close();
     if (musicYoutubeUrl)
         counter++
