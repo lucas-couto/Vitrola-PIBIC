@@ -12,9 +12,9 @@ let page
 async function getUrlYoutube(musicMbid, musicName, musicBiography, musicUrl, musicGenres, artistName, albumMbid, encodedArtistName, encodedMusicName, withoutMbidParam) {
     browser = await puppeteer.launch();
     page = await browser.newPage();
-    await page.goto(musicUrl);
+    await page.goto(musicUrl, {waitUntil: 'load', timeout: 0});
     musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href || null)
-                                .catch(e => console.log(e))
+                                .catch(e => console.log('Link nao encontrado!'))
     await browser.close();
     if (musicYoutubeUrl)
         await releaseDate.releaseDateMusic(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicGenres, artistName, albumMbid, encodedArtistName, encodedMusicName, withoutMbidParam)
