@@ -9,6 +9,8 @@ async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albu
     if(Array.isArray(albumTracks)){
         for (let music of albumTracks) {
             await ifMusicHaveYoutubeUrl(music.url)
+            if(counter != 0)
+                break;
         }
     }else{
         musicUrl = albumTracks.url
