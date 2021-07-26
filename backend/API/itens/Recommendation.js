@@ -12,7 +12,7 @@ let musicAlbumName
 let musicAlbumMbid
 let musicArtistName
 let musicArtistMbid
-let prom
+let getNumberMusics = 10
 let musics
 async function getAllRecommendation(paramsPlaylistMusics) {
     allPlaylistMbidMusics = JSON.parse(paramsPlaylistMusics)
@@ -32,7 +32,7 @@ async function getAllRecommendation(paramsPlaylistMusics) {
 }
 
 async function getTop10Musics(allSimilarMusicsMbid) {
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 0; i < getNumberMusics; i++) {
         musicInfo = await getAllMusicInformation(allSimilarMusicsMbid[i].mbid)
         musicMbid = musicInfo.music.musicMbid
         musicName = musicInfo.music.musicName
