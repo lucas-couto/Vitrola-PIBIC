@@ -53,9 +53,16 @@ async function getTop10Musics(allSimilarMusicsMbid) {
 }
 
 async function discardExistingPlaylistMusics(similarMusicMbid, allPlaylistMbidMusics) {
+
     for (let i = 0; i <= allPlaylistMbidMusics.length; i++) {
-        if (similarMusicMbid == allPlaylistMbidMusics[i] || similarMusicMbid == allSimilarMusicsMbid[i].mbid)
-            return true
+        if (i < allSimilarMusicsMbid.length){
+            if (similarMusicMbid == allPlaylistMbidMusics[i] || similarMusicMbid == allSimilarMusicsMbid[i].mbid)
+                return true
+        }else{            
+            if (similarMusicMbid == allPlaylistMbidMusics[i])
+                return true
+        }
+        
     }
     return false
 }
