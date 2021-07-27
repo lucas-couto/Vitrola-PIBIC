@@ -27,6 +27,7 @@ async function ifMusicHaveYoutubeUrl(musicUrl) {
     await page.goto(musicUrl, {waitUntil: 'load', timeout: 0})
     musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href || null)
                                 .catch(e => console.log('Link nao encontrado!'))
+    await page.close()
     await browser.close()
     if (musicYoutubeUrl)
         counter++
