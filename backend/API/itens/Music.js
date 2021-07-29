@@ -17,7 +17,10 @@ let musicReleaseDate
 let albumMbid
 let albumName
 let artistMbid
-
+/*
+Essa API é responsavel por retornar as informações da Musica.
+Para chamar essa API precisamos do Mbid da Musica.
+*/
 async function getAllMusicInformation(paramsMusicMbid) {
     await Musics.findOne({ where: { music_mbid: paramsMusicMbid } })
         .then(music => {

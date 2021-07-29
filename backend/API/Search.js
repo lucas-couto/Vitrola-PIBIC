@@ -6,6 +6,11 @@ let search
 let artist
 let album
 let music
+/*
+Essa API é responsavel por retornar as informacoes desejadas pelo usuario.
+Para chamar essa API precisamos do nome de um artista, album ou musica.
+Ela é utilizada somente para a pesquisa do usuario.
+*/
 async function searchAllInformations(name) {
     artist = await getArtistSearch(name)
     if(artist){

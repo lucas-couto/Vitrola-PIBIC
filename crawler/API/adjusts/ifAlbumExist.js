@@ -4,6 +4,7 @@ let musicUrl
 let counter
 let browser
 let page
+// Essa funcao e responsavel para ver se o album tem pelo menos uma musica com URL do youtube.
 async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albumImageUrl, artistMbid, artistName, encodedArtistName, encodedAlbumName, albumTracks, withouMbidParam) {
     counter = 0
     if(Array.isArray(albumTracks)){
@@ -20,7 +21,7 @@ async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albu
         await releaseDate.releaseDateAlbum(albumMbid, albumName, albumBiography, albumUrl, albumImageUrl, artistMbid, artistName, encodedArtistName, encodedAlbumName, withouMbidParam)
     }
 }
-
+// Essa funcao e responsavel por verificar se a musica tem URL para o youtube.
 async function ifMusicHaveYoutubeUrl(musicUrl) {
     browser = await puppeteer.launch()
     page = await browser.newPage()

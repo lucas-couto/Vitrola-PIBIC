@@ -7,7 +7,9 @@ let musicsNumber
 let musicsComparison = []
 let top10Similarity = []
 let similarityScore
-
+/*
+    Essa funcao e responsavel por um array de musicas e aplicar a comparacao.
+*/
 async function Principal(musicsArray) {
     /*Para as recomendações totais
     musicsNumber = await getMusicsNumber()
@@ -30,24 +32,27 @@ async function Principal(musicsArray) {
         await putAllSimilarMusicDB(musicPrincipal.musicMbid)
     }
 }
+/*
+async function cleanMusicsInformation(musicPrincipal, musicSecondary){
+    musicsComparison[0] = {
+        musicMbid: musicPrincipal.dataValues.music_mbid,
+        musicGenre: musicPrincipal.dataValues.genre
+    }
+    musicsComparison[1] = {
+        musicMbid: musicSecondary.dataValues.music_mbid,
+        musicGenre: musicSecondary.dataValues.genre
+    }
+}
+*/
 
-// async function cleanMusicsInformation(musicPrincipal, musicSecondary){
-//     musicsComparison[0] = {
-//         musicMbid: musicPrincipal.dataValues.music_mbid,
-//         musicGenre: musicPrincipal.dataValues.genre
-//     }
-//     musicsComparison[1] = {
-//         musicMbid: musicSecondary.dataValues.music_mbid,
-//         musicGenre: musicSecondary.dataValues.genre
-//     }
-// }
-
+// Onde vai ser gerado a similaridade entre duas musicas
 async function getSimilarityScore(musicPrincipal, musicSecondary) {
     similarityScore = await textSimilarity(musicPrincipal, musicSecondary)
     if (similarityScore && similarityScore != NaN)
         await putTop10Similarity(musicSecondary.musicMbid, similarityScore)
 }
 
+// Funcao responsavel por destacar as 10 musicas mais similares de uma musica principal.
 async function putTop10Similarity(secondaryMusicMbid, similarityScore) {
     if (top10Similarity.length != 10) {
         top10Similarity.push({ secondaryMusicMbid, similarityScore })
@@ -59,7 +64,7 @@ async function putTop10Similarity(secondaryMusicMbid, similarityScore) {
         }
     }
 }
-
+// Colocar todas as musicas similares no banco de dados.
 async function putAllSimilarMusicDB(principalMusicMbid) {
     for (let music of top10Similarity) {
         await putSimilarMusicRLDB(principalMusicMbid, music.secondaryMusicMbid, music.similarityScore)

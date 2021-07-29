@@ -5,11 +5,6 @@ const Albums = require('../../Database/Albums/Albums')
 const Artists_Albums = require('../../Database/Relational Tables/Artists_Albums/Artists_Albums')
 const Artists_Similar = require('../../Database/Relational Tables/Artists_Similar/Artists_Similar')
 
-/*
-Essa API é responsavel por retornar as informações do Artista.
-Para chamar essa API precisamos do Mbid do Artista.
-Ela é utilizada para a aplicação se comunicar com ela mesma.
-*/
 
 let exists
 let paramsArtistMbid
@@ -26,6 +21,10 @@ let albumName
 let albumMbid
 let albumImage
 let result
+/*
+Essa API é responsavel por retornar as informações do Artista.
+Para chamar essa API precisamos do Mbid do Artista.
+*/
 async function getAllArtistInformation(paramsArtistMbid) {
     await Artists.findOne({ where: { artist_mbid: paramsArtistMbid } })
         .then(artist => {

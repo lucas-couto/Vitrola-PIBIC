@@ -14,6 +14,12 @@ let musicArtistName
 let musicArtistMbid
 let getNumberMusics = 10
 let musics
+
+/*
+Essa API é responsavel por retornar as recomendacoes da playlist do usuario.
+Para chamar essa API precisamos dos Mbids das musicas que estao na playlist.
+Ela retorna sempre 10 recomendacoes, ranqueando-as de acordo com a pontuacao de similaridade.
+*/
 async function getAllRecommendation(paramsPlaylistMusics) {
     allPlaylistMbidMusics = JSON.parse(paramsPlaylistMusics)
     allRecommendationMusics.length = 0

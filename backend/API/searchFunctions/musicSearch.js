@@ -2,6 +2,12 @@ const Albums_Musics = require('../../Database/Relational Tables/Albums_Musics/Al
 const Artists_Albums = require('../../Database/Relational Tables/Artists_Albums/Artists_Albums')
 const Musics = require('../../Database/Musics/Musics')
 let exists
+
+/*
+Essa API é responsavel por retornar apenas as informações essenciais de uma musica.
+Para chamar essa API precisamos do nome da musica.
+Ela é utilizada somente para a pesquisa do usuario.
+*/
 async function getMusicSearch(name) {
     await Musics.findOne({ where: { name: name } })
         .then(music => {

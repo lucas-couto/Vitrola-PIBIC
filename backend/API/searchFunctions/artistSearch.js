@@ -1,5 +1,10 @@
 const Artists = require('../../Database/Artists/Artists')
 let exists
+/*
+Essa API é responsavel por retornar apenas as informações essenciais de um artista.
+Para chamar essa API precisamos do nome do artista.
+Ela é utilizada somente para a pesquisa do usuario.
+*/
 async function getArtistSearch(name) {
     await Artists.findOne({ where: { name: name } })
         .then(artist => {

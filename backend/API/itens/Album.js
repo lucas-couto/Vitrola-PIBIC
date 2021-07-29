@@ -1,6 +1,3 @@
-// Importa as bibliotecas necessarias
-const express = require('express')
-
 const { getAllArtistInformation } = require('./Artist')
 
 // Relacionado Ao Banco de dados.
@@ -24,6 +21,10 @@ let musicName
 let musicImage
 let musicYoutubeUrl
 
+/*
+Essa API é responsavel por retornar todas as informações do Album.
+Para chamar essa API precisamos do Mbid do Album.
+*/
 async function getAllAlbumInformation(paramsAlbumMbid) {
     await Albums.findOne({ where: { album_mbid: paramsAlbumMbid } })
         .then(album => {

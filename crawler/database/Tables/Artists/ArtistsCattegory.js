@@ -33,6 +33,7 @@ async function putArtistDB(artistMbid, artistName, artistBiography, artistUrl, a
         await Similar.getSimilar(newArtistMbid || artistMbid, artistName)
 }
 
+// Essa funcao tem o objetivo de colocar um artista sem Mbid no banco de dados.
 async function putArtistWithoutMbidDB(artistMbid, artistName, artistBiography, artistUrl, artistDirectoryImage) {
     existArtist = await Artists.findOne({ where: { name: artistName, url: artistUrl } })
     if (!existArtist) {
@@ -59,6 +60,8 @@ async function putArtistWithoutMbidDB(artistMbid, artistName, artistBiography, a
         return existArtist.dataValues.artist_mbid
     }
 }
+
+// Essa funcao tem o objetivo de colocar um artista com Mbid no banco de dados.
 async function putArtistWithMbidDB(artistMbid, artistName, artistBiography, artistUrl, artistDirectoryImage) {
     existArtist = await Artists.findOne({ where: { artist_mbid: artistMbid } })
     if (existArtist)

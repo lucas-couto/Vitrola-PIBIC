@@ -3,7 +3,8 @@ const withoutMbid = require('./withoutMbid')
 let data
 let hours
 let minutes
-// Colocar as informações no banco de dados.
+
+// Colocar as informações ns tabela relacional.
 async function putWithoutMbidDB(newMbid, name, artistName, type) {
     data = new Date()
     hours = data.getHours()

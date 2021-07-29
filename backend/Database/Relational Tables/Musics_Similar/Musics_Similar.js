@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const connection = require('../../database')
 
-// Criar a tabela.
+// Criar a tabela e/ou identifica a tabela.
 const Musics_Similar = connection.define('musics_similar', {
     music_mbid: {
         type: Sequelize.STRING,
