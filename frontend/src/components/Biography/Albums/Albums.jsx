@@ -87,11 +87,11 @@ const Albums = props => {
                             </div>
                         </div> */}
                         <div>
-                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics}>Musicas do album</button>
+                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={!albumMusics}>Musicas do album</button>
                             <div className="Musics">
                                 {showAlbumMusics ? (
                                     <div className="albumMusics" style={{ backgroundColor: '#9C9C9C' }}>
-                                        <Musics />
+                                        <Musics/>
                                     </div>
                                 ) : null}
                             </div>

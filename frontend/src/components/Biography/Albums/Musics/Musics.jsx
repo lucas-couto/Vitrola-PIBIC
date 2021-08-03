@@ -138,7 +138,7 @@ const Musics = props => {
             }
         }
     }
-    const List = albumMusics.map(music => {
+    const List = props.albumMusics.map(music => {
         if (music.musicMbid === props.featuredMusic) {
             return (
                 <div className="featuredItem">
