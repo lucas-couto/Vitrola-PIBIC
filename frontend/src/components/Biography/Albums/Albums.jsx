@@ -9,7 +9,7 @@ import API from '../../../store/api'
 let name
 let mbid
 const Albums = props => {
-    const { artistMbid, artistAlbums, albumName, albumMbid, albumBiography, albumImage, albumMusics } = props
+    const { artistAlbums, albumMbid, albumMusics } = props
     const [album_Name, setAlbumName] = useState('block')
     const [displayAlbumList, setDisplayAlbumList] = useState('block')
     const [displayFeaturedAlbum, setDisplayFeaturedAlbum] = useState('none')
@@ -55,6 +55,7 @@ const Albums = props => {
         name = e.currentTarget.getAttribute("data-name")
         mbid = e.currentTarget.getAttribute("data-mbid")
         setAlbumName(name)
+        props.loadingMusic()
         props.albumInformations(mbid)
         setShowFeaturedAlbum(true)
         setDisplayFeaturedAlbum('flex')
@@ -74,19 +75,6 @@ const Albums = props => {
                 <div className="albumInfo">
                     <strong className="albumName">{album_Name}</strong>
                     <div className="albumContent">
-                        {/* <div className="albumBiography">
-                            <button className="albumBiographyBtn" onClick={handleClickAlbumBiography}><span>Biografia do album</span></button>
-                            <div>
-                                {showAlbumBiography ? (
-                                    <div className="albumBiographyText" style={{ backgroundColor: '#9C9C9C' }}>
-                                        <img src={albumImage} alt="" />
-                                        <p>
-                                            {albumBiography}
-                                        </p>
-                                    </div>
-                                ) : null}
-                            </div>
-                        </div> */}
                         <div>
                             <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={!albumMusics}>Musicas do album</button>
                             {albumMusics ? null : (<Ring
@@ -136,6 +124,9 @@ const mapDispatchToProp = dispatch => {
     return {
         async albumInformations(albumMbid) {
             dispatch(await album(albumMbid))
+        },
+        loadingMusic(){
+            dispatch({type: 'LOADING_MUSIC', loading: true})
         }
     }
 }

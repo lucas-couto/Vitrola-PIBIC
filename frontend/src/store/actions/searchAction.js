@@ -11,14 +11,16 @@ export async function search(name) {
                     payload: {
                         artist: res.data.artist,
                         album: res.data.album,
-                        music: res.data.music
+                        music: res.data.music,
+                        loadingApp: false
                     }
                 }
             }else{
                 return{
                     type: 'SEARCH',
                     payload: {
-                        notFound: true
+                        notFound: true,
+                        loadingApp: false
                     }
                 }
             }
