@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Albums.css'
 
+import { Ring } from 'react-spinners-css';
 import Musics from './Musics/Musics'
 import { connect } from 'react-redux'
 import { album } from '../../../store/actions/albumAction'
@@ -21,8 +22,8 @@ const Albums = props => {
                 <div className="featuredAlbum" key={album.albumMbid}>
                     <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                         <a href="#">
-                            <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50" 
-                            onError={e => {e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png`}}/>
+                            <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50"
+                                onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }} />
                             <strong>{album.albumName}</strong>
                         </a>
                     </li>
@@ -32,8 +33,8 @@ const Albums = props => {
         return (
             <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                 <a href="#">
-                    <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50" 
-                    onError={e => {e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png`}}/>
+                    <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50"
+                        onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }} />
                     <strong>{album.albumName}</strong>
                 </a>
             </li>
@@ -88,6 +89,10 @@ const Albums = props => {
                         </div> */}
                         <div>
                             <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={!albumMusics}>Musicas do album</button>
+                            {albumMusics ? null : (<Ring
+                                color="#000"
+                                size={30}
+                            />)}
                             <div className="Musics">
                                 {showAlbumMusics ? (
                                     <div className="albumMusics" style={{ backgroundColor: '#9C9C9C' }}>
