@@ -1,4 +1,4 @@
-const { getAllArtistInformation } = require('./Artist')
+const getArtistSearch = require('../searchFunctions/artistSearch')
 
 // Relacionado Ao Banco de dados.
 const Albums = require('../../Database/Albums/Albums')
@@ -80,7 +80,7 @@ async function getAllAlbumInformation(paramsAlbumMbid) {
         })
     return {
         title: 'Album',
-        artist: await getAllArtistInformation(artistMbid),
+        artist: await getArtistSearch(null, artistMbid),
         album: {
             albumMbid,
             albumName,
