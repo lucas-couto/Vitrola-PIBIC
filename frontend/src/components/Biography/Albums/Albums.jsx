@@ -91,7 +91,7 @@ const Albums = props => {
                             <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={!albumMusics}>Musicas do album</button>
                             {albumMusics ? null : (<Ring
                                 color="#000"
-                                size={30}
+                                size={31}
                             />)}
                             <div className="Musics">
                                 {showAlbumMusics ? (
