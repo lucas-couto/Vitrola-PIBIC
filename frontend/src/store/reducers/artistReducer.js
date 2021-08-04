@@ -19,26 +19,6 @@ export default (state = INITIAL_STATE, action) =>{
                 similarArtists: action.payload.similarArtists,
                 artistAlbums: action.payload.artistAlbums
             }
-        case 'ALBUM':
-            return{
-                ...state,
-                artistMbid: action.payload.artistMbid,
-                artistName: action.payload.artistName,
-                artistBiography: action.payload.artistBiography,
-                artistImage: action.payload.artistImage,
-                similarArtists: action.payload.similarArtists,
-                artistAlbums: action.payload.artistAlbums
-            }
-        case 'MUSIC':
-            return{
-                ...state,
-                artistMbid: action.payload.artistMbid,
-                artistName: action.payload.artistName,
-                artistBiography: action.payload.artistBiography,
-                artistImage: action.payload.artistImage,
-                similarArtists: action.payload.similarArtists,
-                artistAlbums: action.payload.artistAlbums
-            }
         default:
             return state
     }

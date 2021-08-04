@@ -44,34 +44,8 @@ async function getAllMusicInformation(paramsMusicMbid) {
             title: 'NotFound'
         }
     }
-    await Albums_Musics.findOne({ where: { musics_mbid: musicMbid } })
-        .then(albumMusic => {
-            albumMbid = albumMusic.dataValues.albums_mbid
-        })
-        .catch(e => {
-            console.log(e)
-        })
-    await Albums.findOne({ where: { album_mbid: albumMbid } })
-        .then(album => {
-            albumName = album.name
-        })
-        .catch(e => {
-            console.log(e)
-        })
-    await Artists_Albums.findOne({ where: { albums_mbid: albumMbid } })
-        .then(artistAlbum => {
-            artistMbid = artistAlbum.dataValues.artist_mbid
-        })
-        .catch(e => {
-            console.log(e)
-        })
     return {
         title: 'Music',
-        artist: await getAllArtistInformation(artistMbid),
-        album: {
-            albumMbid,
-            albumName
-        },
         music: {
             musicMbid,
             musicName,

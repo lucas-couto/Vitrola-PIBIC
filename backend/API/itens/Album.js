@@ -47,13 +47,6 @@ async function getAllAlbumInformation(paramsAlbumMbid) {
             title: 'NotFound'
         }
     }
-    await Artists_Albums.findOne({ where: { albums_mbid: albumMbid } })
-        .then(artistAlbum => {
-            artistMbid = artistAlbum.dataValues.artist_mbid
-        })
-        .catch(e => {
-            console.log(e)
-        })
     await Albums_Musics.findAll({ where: { albums_mbid: albumMbid } })
         .then(allMusics => {
             albumMusics = []
@@ -80,7 +73,6 @@ async function getAllAlbumInformation(paramsAlbumMbid) {
         })
     return {
         title: 'Album',
-        artist: await getArtistSearch(null, artistMbid),
         album: {
             albumMbid,
             albumName,
