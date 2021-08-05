@@ -4,6 +4,7 @@ import './Graph.css'
 
 import { connect } from 'react-redux'
 import { artist } from '../../store/actions/artistAction'
+import { Ring } from 'react-spinners-css';
 let options = {
     autoResize: true,
     nodes: {
@@ -76,7 +77,7 @@ let similarArtistName
 let similarArtistMbid
 let id
 const Graph1 = props => {
-    const { artistName, artistMbid, similarArtists } = props
+    const { artistName, artistMbid, similarArtists, loading } = props
     const [network, setNetwork] = useState(null)
     const [Nodes, setNodes] = useState(null)
     const [Edges, setEdges] = useState(null)
@@ -90,26 +91,27 @@ const Graph1 = props => {
         nodes: Nodes,
         edges: Edges
     };
-        if(network){
-            network.once("beforeDrawing", function () {
-                network.focus(1, {
-                  scale: 5,
-                });
-              });
-              network.once("afterDrawing", function () {
-                network.fit({
-                  animation: {
+    if (network) {
+        network.once("beforeDrawing", function () {
+            network.focus(1, {
+                scale: 5,
+            });
+        });
+        network.once("afterDrawing", function () {
+            network.fit({
+                animation: {
                     duration: 3000,
                     easingFunction: 'linear',
-                  },
-                });
-              });
-            setNetwork(null)
-        }
+                },
+            });
+        });
+        setNetwork(null)
+    }
     events = {
         doubleClick: function (event) {
             indexNode = event.nodes[0]
             featuredArtist = graph.nodes[indexNode - 1].artistMbid
+            props.loadingApp()
             props.artistAction(featuredArtist)
             searchMainSimilarArtist(featuredArtist)
         }
@@ -132,7 +134,7 @@ const Graph1 = props => {
                 options={options}
                 style={style}
                 events={events}
-                getNetwork={e => {setNetwork(e)}}
+                getNetwork={e => { setNetwork(e) }}
             />
         )
     }
@@ -151,45 +153,22 @@ const Graph1 = props => {
         })
         setNodes(allNodes)
         setEdges(allEdges)
-        // searchSimilarsNivel2(similarArray, allNodes, allEdges)
         setShow(true)
     }
-
-    // function searchSimilarsNivel2(similarArray, allNodes, allEdges) {
-    //     if (similarArray) {
-    //         similarArray.forEach(artist => {
-    //             axios.get(`http://localhost:3001/artist/${artist.artistMbid}`)
-    //                 .then(res => {
-    //                     let nodeId = artist.nodeId
-    //                     const similarArray = []
-    //                     let similarArtists = res.data.arraySimilarArtists
-    //                     if (similarArtists.length !== 0) {
-    //                     }
-    //                     similarArtists.forEach((artist, index) => {
-    //                         let id = lastNodeId ++
-    //                         lastNodeId = id
-    //                         let similarArtistName = artist.similarArtistName
-    //                         let similarArtistMbid = artist.similarArtistMbid
-    //                         console.log(id)
-    //                         allNodes.push({ artistMbid: similarArtistMbid, id: id, label: similarArtistName },)
-    //                         allEdges.push({ from: nodeId, to: id, arrows: 'from' },)
-    //                         similarArray.push({ similarArtistMbid, id })
-    //                     })
-    //                     setAllNodes(allNodes)
-    //                     setAllEdges(allEdges)
-    //                     searchSimilarsNivel3(similarArray, allNodes, allEdges)
-    //                 })
-    //         })
-    //     }
-    // }
-    // function searchSimilarsNivel3(similarArtistMbid, id) {
-
-    //     setNodes(allNodes)
-    //     setEdges(allEdges)
-    // }
+    function initial() {
+        console.log(loading)
+        if (loading)
+            return (<div className="loading">
+                <Ring color="#FF6161" size={45} />
+            </div>)
+        else if(show)
+            return showGraph()
+        else
+            return wellCome()
+    }
     return (
         <div className="Graph">
-            {show ? (showGraph()) : (wellCome())}
+            {initial()}
         </div>
     )
 }
@@ -197,7 +176,8 @@ const mapStateToProps = state => {
     return {
         artistName: state.artist.artistName,
         artistMbid: state.artist.artistMbid,
-        similarArtists: state.artist.similarArtists
+        similarArtists: state.artist.similarArtists,
+        loading: state.loading.loadingApp
     }
 }
 
@@ -205,6 +185,9 @@ const mapDispatchToProp = dispatch => {
     return {
         async artistAction(artistMbid) {
             dispatch(await artist(artistMbid))
+        },
+        loadingApp() {
+            dispatch({ type: 'LOADING_APP', loadingApp: true })
         }
     }
 }
