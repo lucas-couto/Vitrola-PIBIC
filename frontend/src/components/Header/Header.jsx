@@ -59,6 +59,7 @@ const Header = props => {
         mbid = e.currentTarget.getAttribute("data-mbid")
         type = e.currentTarget.getAttribute("data-type")
         setShowResults(false)
+        props.loadingApp()
         if (type == 'artist')
             props.artistAction(mbid)
         if (type == 'album')
@@ -134,6 +135,9 @@ const mapDispatchToProps = dispatch => {
         async musicAction(mbid) {
             const action = await music(mbid)
             dispatch(action)
+        },
+        loadingApp(){
+            dispatch({type: 'LOADING_APP', loadingApp: true})
         }
     }
 }
