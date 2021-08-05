@@ -156,7 +156,6 @@ const Graph1 = props => {
         setShow(true)
     }
     function initial() {
-        console.log(loading)
         if (loading)
             return (<div className="loading">
                 <Ring color="#FF6161" size={45} />
