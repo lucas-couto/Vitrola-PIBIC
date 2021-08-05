@@ -126,7 +126,7 @@ const mapDispatchToProp = dispatch => {
             dispatch(await album(albumMbid))
         },
         loadingMusic(){
-            dispatch({type: 'LOADING_MUSIC', loading: true})
+            dispatch({type: 'LOADING_MUSIC', loadingMusic: true})
         }
     }
 }

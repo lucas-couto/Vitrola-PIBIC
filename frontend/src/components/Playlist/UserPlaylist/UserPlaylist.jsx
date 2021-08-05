@@ -18,14 +18,6 @@ let musicYoutubeUrl
 let albumName
 
 const UserPlaylist = props => {
-    const ifMusicExists = (file) => {
-        try {
-            console.log(require(file))
-            // return require(file)
-        } catch (e) {
-            return false
-        }
-    }
     const cellPhone = useMediaQuery('(max-width:575.98px)');
     const small = useMediaQuery('(min-width: 576px) and (max-width: 767.98px)');
     const medium = useMediaQuery('(min-width: 768px) and (max-width: 991.98px)');
@@ -141,6 +133,7 @@ const UserPlaylist = props => {
     function removeMusic(e) {
         musicMbid = e.currentTarget.getAttribute("data-mbid")
         props.removePlaylistMusicAction(musicMbid)
+        props.loadingRecommendation()
         props.recommendationAction()
     }
 
@@ -229,6 +222,9 @@ const mapDispatchToProp = dispatch => {
         },
         async recommendationAction() {
             dispatch(await recommendation())
+        },
+        loadingRecommendation(){
+            dispatch({type: 'LOADING_RECOMMENDATION', loadingRecommendation: true})
         }
     }
 }

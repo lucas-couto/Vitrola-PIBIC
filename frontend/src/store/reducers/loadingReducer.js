@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     loadingMusic: false,
-    loadingApp: false
+    loadingApp: false,
+    loadingRecommendation: false 
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,6 +25,16 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 loadingMusic: action.payload.loadingMusic
+            }
+        case 'LOADING_RECOMMENDATION':
+            return{
+                ...state,
+                loadingRecommendation: true
+            }
+        case 'RECOMMENDATION':
+            return{
+                ...state,
+                loadingRecommendation: action.loadingRecommendation
             }
         default:
             return state

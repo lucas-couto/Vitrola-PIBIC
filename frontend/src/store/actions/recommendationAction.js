@@ -15,7 +15,8 @@ export async function recommendation() {
             .then(res => {
                 return {
                     type: 'RECOMMENDATION',
-                    payload: res.data
+                    payload: res.data,
+                    loadingRecommendation: false
                 }
             })
             .catch(e => {
@@ -24,7 +25,8 @@ export async function recommendation() {
     } else {
         return {
             type: 'RECOMMENDATION',
-            payload: null
+            payload: null,
+            loadingRecommendation: false
         }
     }
 }

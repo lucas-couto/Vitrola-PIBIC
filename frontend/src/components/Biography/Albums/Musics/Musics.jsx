@@ -31,6 +31,7 @@ const Musics = props => {
         musicYoutubeUrl = e.currentTarget.getAttribute("data-urlyoutube")
         musicImage = e.currentTarget.getAttribute("data-musicdirectoryimage")
         props.playlistAction(musicMbid, musicName, musicYoutubeUrl, musicImage, albumName, albumMbid, artistName, artistMbid)
+        props.loadingRecommendation()
         props.recommendationAction()
     }
 
@@ -225,6 +226,9 @@ const mapDispatchToProp = dispatch => {
         },
         async recommendationAction() {
             dispatch(await recommendation())
+        },
+        loadingRecommendation(){
+            dispatch({type: 'LOADING_RECOMMENDATION', loadingRecommendation: true})
         }
     }
 }
