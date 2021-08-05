@@ -76,7 +76,7 @@ const Albums = props => {
                     <strong className="albumName">{album_Name}</strong>
                     <div className="albumContent">
                         <div>
-                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={!albumMusics}>Musicas do album</button>
+                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={!albumMusics}>Musicas do álbum</button>
                             {albumMusics ? null : (<Ring
                                 color="#000"
                                 size={31}
@@ -97,7 +97,7 @@ const Albums = props => {
 
     return (
         <div className="albumList">
-            <button className="albumsListBtn" onClick={handleClickAlbumList}>Albums</button>
+            <button className="albumsListBtn" onClick={handleClickAlbumList}>Álbuns</button>
             <div className="albums" style={{ display: displayAlbumList }}>
                 <ul>
                     {List}
