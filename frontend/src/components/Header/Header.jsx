@@ -90,7 +90,7 @@ const Header = props => {
     return (
         <div className="Header">
             <label className="SearchLabel">Pesquisar: </label>
-            <input className="SearchInput" type="text" list="data" placeholder=" Artista, Album, Musica" onKeyDown={handleKeyDown} onChange={setValue} />
+            <input className="SearchInput" type="text" list="data"  onKeyDown={handleKeyDown} onChange={setValue} />
             <div className="Icons">
                 <IconButton size="small" onClick={handleSearch}>
                     <SearchIcon style={{ fontSize: 25, color: grey[50] }} />
