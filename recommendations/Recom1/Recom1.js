@@ -10,8 +10,7 @@ let similarityScore
 /*
     Essa funcao e responsavel por um array de musicas e aplicar a comparacao.
 */
-async function Principal(musicsArray) {
-    /*Para as recomendações totais
+async function Principal() {
     musicsNumber = await getMusicsNumber()
     for (let i = 0; i < musicsNumber; i++) {
         musicPrincipal = await Musics.findAll({ offset: i, limit: 1 })
@@ -22,17 +21,8 @@ async function Principal(musicsArray) {
         }
         await putAllSimilarMusicDB(musicPrincipal[0].dataValues.music_mbid)
     }
-    */
-    for (let i = 0; i < musicsArray.length; i++) {
-        musicPrincipal = musicsArray[i]
-        for (let o = i + 1; o < musicsArray.length; o++) {
-            musicSecondary = musicsArray[o]
-            await getSimilarityScore(musicPrincipal, musicSecondary)
-        }
-        await putAllSimilarMusicDB(musicPrincipal.musicMbid)
-    }
 }
-/*
+
 async function cleanMusicsInformation(musicPrincipal, musicSecondary){
     musicsComparison[0] = {
         musicMbid: musicPrincipal.dataValues.music_mbid,
@@ -43,7 +33,6 @@ async function cleanMusicsInformation(musicPrincipal, musicSecondary){
         musicGenre: musicSecondary.dataValues.genre
     }
 }
-*/
 
 // Onde vai ser gerado a similaridade entre duas musicas
 async function getSimilarityScore(musicPrincipal, musicSecondary) {

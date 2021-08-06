@@ -23,16 +23,6 @@ async function putMusicsDB(musicMbid, musicName, musicBiography, musicYoutubeUrl
     }
     await putMusicRLDB(albumMbid, newMusicMbid || musicMbid)
 }
-//Essa funcao tem o objetivo de pegar 500 musicas e fazer as similaridades entre elas.
-async function get500music(musicMbid, musicGenre) {
-    counter++
-    musicsArray.push({ musicMbid: musicMbid, musicGenre: musicGenre })
-    if (counter == 500) {
-        await Recommendations.startRecommendations(musicsArray)
-        musicsArray.length = 0
-        counter = 0
-    }
-}
 // Essa funcao tem o objetivo de colocar uma musica sem Mbid no banco de dados.
 async function putMusicWithoutMbidDB(musicMbid, musicName, musicBiography, musicYoutubeUrl, musicReleaseDate, musicImageDirectory, musicGenre, artistName) {
     existMusic = await withoutMbid.findOne({ where: { name: musicName, artistName: artistName, type: 'music' } })
@@ -50,7 +40,6 @@ async function putMusicWithoutMbidDB(musicMbid, musicName, musicBiography, music
             genre: musicGenre
         }).then(async () => {
             console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica sem Mbid cadastrada com sucesso!`)
-            await get500music(musicMbid, musicGenre)
         }).catch(e => {
             console.log(e)
         })
@@ -75,7 +64,6 @@ async function putMusicWithMbid(musicMbid, musicName, musicBiography, musicYoutu
             genre: musicGenre
         }).then(async () => {
             console.log('\x1b[32m%s\x1b[0m', `${hours}:${minutes} - Musica cadastrada com sucesso!`)
-            await get500music(musicMbid, musicGenre)
         }).catch(e => {
             console.log(e)
         })
