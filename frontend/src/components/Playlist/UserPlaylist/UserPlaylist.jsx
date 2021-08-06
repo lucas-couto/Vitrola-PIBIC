@@ -88,8 +88,7 @@ const UserPlaylist = props => {
         return (
             <label>
                 Aqui é a sua playlist, para adicionar uma musica
-                aperte no botão + , do lado da musica desejada, para
-                adicionar a playlist
+                aperte no botão + , do lado da musica desejada.
             </label>
         )
     }

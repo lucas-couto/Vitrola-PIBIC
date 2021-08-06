@@ -89,8 +89,8 @@ const UserRecommendations = props => {
     function ifPlaylistNotExist() {
         return (
             <label>
-                Aqui são suas musicas recomendadas, que são escolhidas de acordo com o seu gosto musical!
-                Para iniciar as recommendações adicione musicas na sua playlist
+                Aqui são suas musicas recomendadas de acordo com o seu gosto musical!
+                Para iniciar as recomendações adicione musicas na sua playlist
             </label>
         )
     }

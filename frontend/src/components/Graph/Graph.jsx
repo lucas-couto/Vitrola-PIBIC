@@ -123,7 +123,7 @@ const Graph1 = props => {
         return (
             <div className="wellCome">
                 <h1>Bem vindo!</h1>
-                <p>Para começar a utilizar o aplicativo, por favor digite o nome de um Artista, Album ou uma Musica.</p><br />
+                <p>Para começar a utilizar o aplicativo, por favor digite o nome de um Artista.</p><br />
             </div>
         )
     }
