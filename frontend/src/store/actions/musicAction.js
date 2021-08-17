@@ -6,12 +6,6 @@ export async function music(musicMbid) {
             return {
                 type: 'MUSIC',
                 payload: {
-                    artistMbid: res.data.artist.artistMbid,
-                    artistName: res.data.artist.artistName,
-                    artistBiography: res.data.artist.artistBiography,
-                    artistImage: res.data.artist.artistImage,
-                    similarArtists: res.data.artist.similarArtists,
-                    artistAlbums: res.data.artist.artistAlbums,
                     albumMbid: res.data.album.albumMbid,
                     albumName: res.data.album.albumName,
                     musicMbid: res.data.music.musicMbid,

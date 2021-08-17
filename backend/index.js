@@ -10,8 +10,6 @@ const connection = require('./Database/database')
 
 // Importa outros arquivos 
 const { Artist } = require('./API/itens/Artist')
-const { ArtistAlbums } = require('./API/itens/ArtistAlbums')
-const { ArtistSimilars } = require('./API/itens/ArtistSimilars')
 const { Album } = require('./API/itens/Album')
 const { Music } = require('./API/itens/Music')
 const { Recommendation } = require('./API/itens/Recommendation')
@@ -21,11 +19,9 @@ const { Search } = require('./API/Search')
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../frontend/build')))
 
-// É utilizada para chamar as API das outras pastas
+// Essa sao as URLs da API.
 app.get('/search/:search', Search)
 app.get('/artist/:artistMbid', Artist)
-// app.get('/artist/albums/:artistMbid', ArtistAlbums)
-// app.get('/artist/similars/:artistMbid', ArtistSimilars)
 app.get('/album/:albumMbid', Album)
 app.get('/music/:musicMbid', Music)
 app.get('/music/recommendation/:playlistMusics', Recommendation)

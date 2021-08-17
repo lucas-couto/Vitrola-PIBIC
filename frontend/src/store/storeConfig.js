@@ -5,6 +5,7 @@ import albumReducer from './reducers/albumReducer'
 import playMusicReducer from './reducers/playMusicReducer'
 import playlistReducer from './reducers/playlistReducer'
 import recommendationReducer from './reducers/recommendationReducer'
+import loadingReducer from './reducers/loadingReducer'
 
 const reducers = combineReducers({
     search: searchReducer,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
     album: albumReducer,
     playMusic: playMusicReducer,
     playlist: playlistReducer,
-    recommendation: recommendationReducer
+    recommendation: recommendationReducer,
+    loading: loadingReducer,
 })
 
 const storeConfig = () => {

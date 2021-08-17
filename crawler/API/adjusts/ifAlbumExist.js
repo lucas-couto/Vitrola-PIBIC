@@ -1,14 +1,17 @@
-const Music = require('../Music')
-const cheerio = require('cheerio')
-const rp = require('request-promise');
+const puppeteer = require('puppeteer')
 const releaseDate = require('./releaseDate')
 let musicUrl
 let counter
+let browser
+let page
+// Essa funcao e responsavel para ver se o album tem pelo menos uma musica com URL do youtube.
 async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albumImageUrl, artistMbid, artistName, encodedArtistName, encodedAlbumName, albumTracks, withouMbidParam) {
     counter = 0
     if(Array.isArray(albumTracks)){
         for (let music of albumTracks) {
             await ifMusicHaveYoutubeUrl(music.url)
+            if(counter != 0)
+                break;
         }
     }else{
         musicUrl = albumTracks.url
@@ -18,21 +21,15 @@ async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albu
         await releaseDate.releaseDateAlbum(albumMbid, albumName, albumBiography, albumUrl, albumImageUrl, artistMbid, artistName, encodedArtistName, encodedAlbumName, withouMbidParam)
     }
 }
-
+// Essa funcao e responsavel por verificar se a musica tem URL para o youtube.
 async function ifMusicHaveYoutubeUrl(musicUrl) {
-    options = {
-        uri: musicUrl,
-        transform: function (body) {
-            return cheerio.load(body);
-        }
-    }
-    await rp(options)
-        .then($ => {
-            musicYoutubeUrl = $('a.play-this-track-playlink--youtube').attr('href')
-        })
-        .catch(e => {
-            console.log(e)
-        })
+    browser = await puppeteer.launch()
+    page = await browser.newPage()
+    await page.goto(musicUrl, {waitUntil: 'load', timeout: 0})
+    musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href || null)
+                                .catch(e => console.log('Link nao encontrado!'))
+    await page.close()
+    await browser.close()
     if (musicYoutubeUrl)
         counter++
 }

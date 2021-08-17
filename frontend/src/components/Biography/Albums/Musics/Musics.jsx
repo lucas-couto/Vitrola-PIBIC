@@ -18,14 +18,12 @@ let musicMbid
 let musicYoutubeUrl
 let musicImage
 const Musics = props => {
-    const { artistName, artistMbid, albumMusics, albumName, albumMbid, playingMusic, playingMusicName } = props
+    const { artistName, artistMbid, albumName, albumMbid, albumMusics, playingMusic, playingMusicName, loading } = props
     const cellPhone = useMediaQuery('(max-width:575.98px)');
     const small = useMediaQuery('(min-width: 576px) and (max-width: 767.98px)');
     const medium = useMediaQuery('(min-width: 768px) and (max-width: 991.98px)');
     const large = useMediaQuery('(min-width: 992px) and (max-width: 1366px)');
     const veryLarge = useMediaQuery('(min-width: 1367px)');
-    const [musicsFound, setMusicsFound] = useState(false)
-
     // Adicionar uma musica na playlist.
     const handleAddPlaylist = e => {
         musicName = e.currentTarget.getAttribute("data-name")
@@ -33,6 +31,7 @@ const Musics = props => {
         musicYoutubeUrl = e.currentTarget.getAttribute("data-urlyoutube")
         musicImage = e.currentTarget.getAttribute("data-musicdirectoryimage")
         props.playlistAction(musicMbid, musicName, musicYoutubeUrl, musicImage, albumName, albumMbid, artistName, artistMbid)
+        props.loadingRecommendation()
         props.recommendationAction()
     }
 
@@ -183,15 +182,9 @@ const Musics = props => {
             )
         }
     })
-    useEffect(() => {
-        setMusicsFound(false)
-    }, [])
-    useEffect(() => {
-        setMusicsFound(true)
-    }, [List])
     return (
         <div className="musicList">
-            {musicsFound ? (
+            {!loading ? (
                 <ul>
                     {List}
                 </ul>
@@ -210,12 +203,13 @@ const mapStateToProps = state => {
     return {
         artistName: state.artist.artistName,
         artistMbid: state.artist.artistMbid,
-        albumName: state.album.albumName,
         albumMbid: state.album.albumMbid,
+        albumName: state.album.albumName,
         albumMusics: state.album.albumMusics,
         playingMusicName: state.playMusic.musicName,
         playingMusic: state.playMusic.playingMusic,
-        musicExist: state.playlist.musicExist
+        musicExist: state.playlist.musicExist,
+        loading: state.loading.loadingMusic
     }
 }
 
@@ -232,6 +226,9 @@ const mapDispatchToProp = dispatch => {
         },
         async recommendationAction() {
             dispatch(await recommendation())
+        },
+        loadingRecommendation(){
+            dispatch({type: 'LOADING_RECOMMENDATION', loadingRecommendation: true})
         }
     }
 }

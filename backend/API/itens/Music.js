@@ -1,6 +1,6 @@
-const { getAllArtistInformation } = require('./Artist')
 
 // Relacionado Ao Banco de dados.
+const Artists = require('../../Database/Artists/Artists')
 const Albums = require('../../Database/Albums/Albums')
 const Musics = require('../../Database/Musics/Musics')
 const Albums_Musics = require('../../Database/Relational Tables/Albums_Musics/Albums_Musics')
@@ -17,7 +17,11 @@ let musicReleaseDate
 let albumMbid
 let albumName
 let artistMbid
-
+let artistName
+/*
+Essa API é responsavel por retornar as informações da Musica.
+Para chamar essa API precisamos do Mbid da Musica.
+*/
 async function getAllMusicInformation(paramsMusicMbid) {
     await Musics.findOne({ where: { music_mbid: paramsMusicMbid } })
         .then(music => {
@@ -62,9 +66,19 @@ async function getAllMusicInformation(paramsMusicMbid) {
         .catch(e => {
             console.log(e)
         })
+    await Artists.findOne({ where: { artist_mbid: artistMbid } })
+        .then(artist => {
+            artistName = artist.dataValues.name
+        })
+        .catch(e => {
+            console.log(e)
+        })
     return {
         title: 'Music',
-        artist: await getAllArtistInformation(artistMbid),
+        artist:{
+            artistMbid,
+            artistName,
+        },
         album: {
             albumMbid,
             albumName

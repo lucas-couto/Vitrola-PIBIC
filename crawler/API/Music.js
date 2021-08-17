@@ -53,13 +53,15 @@ async function allTracks(albumMbid, artistName, albumTracks) {
         for (let track of albumTracks) {
             encodedMusicName = encodeURI(track.name)
             musicName = track.name
-            musicUrl = track.url || null
-            await trackGetInfo(musicName, musicUrl, albumMbid, artistName)
+            musicUrl = track.url
+            if (musicUrl)
+                await trackGetInfo(musicName, musicUrl, albumMbid, artistName)
         }
     } else {
         musicName = albumTracks.name
         musicUrl = albumTracks.url
-        await trackGetInfo(musicName, musicUrl, albumMbid, artistName)
+        if (musicUrl)
+            await trackGetInfo(musicName, musicUrl, albumMbid, artistName)
     }
 }
 

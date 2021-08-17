@@ -3,7 +3,8 @@ let data
 let hours
 let minutes
 let existAlbums_Musics
-// Colocar as informações no banco de dados.
+
+// Colocar as informações na tabela relacional.
 async function putMusicRLDB(albumMbid, musicMbid) {
     data = new Date()
     hours = data.getHours()

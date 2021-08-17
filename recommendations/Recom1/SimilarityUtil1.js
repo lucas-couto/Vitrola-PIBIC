@@ -10,6 +10,8 @@ let dotProduct
 let leftNorm 
 let rightNorm 
 let result
+
+// Essa funcao e responsavel por fazer a contagem e separacao das tags de duas musicas.
 async function textSimilarity(principalMusic, secondaryMusic) {
     principalTagsVector = []
     secondaryTagsVector = []
@@ -47,6 +49,8 @@ async function textSimilarity(principalMusic, secondaryMusic) {
     result = await vectorSimilarity(principalBinaryVector, secondaryBinaryVector)
     return result
 }
+
+//Funcao responsavel pelo calculo de similaridade entre duas musicas.
 async function vectorSimilarity(principalVector, secondaryVector) {
     dotProduct = 0
     leftNorm = 0
@@ -59,6 +63,7 @@ async function vectorSimilarity(principalVector, secondaryVector) {
     result = dotProduct / (Math.sqrt(leftNorm) * Math.sqrt(rightNorm)) 
     return result
 }
+//Funcao responsavel por achar uma tag.
 async function searchTag(tags, tagOne){
     for (let i = 0; i < tags.length; i++) {
         if(tagOne == tags[i].tag)

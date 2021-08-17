@@ -4,7 +4,7 @@ let data
 let hours
 let minutes
 let existMusics_Similar
-// Colocar as informações no banco de dados.
+// Colocar as informações na tabela relacional.
 async function putSimilarMusicRLDB(principalMusicMbid, secondaryMusicMbid, similarityScore) {
     data = new Date()
     hours = data.getHours()

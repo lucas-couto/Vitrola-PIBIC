@@ -63,30 +63,30 @@ async function screenshotPuppeteer(url, path, type) {
                 page = await browser.newPage()
                 await page.goto(url)
                 await page.screenshot({ path: path, clip: { x: 275, y: 175, width: 250, height: 250 } })
+                browser.close()
             }catch(e){
                 console.log(e)
             }
-            browser.close()
         } else if (type == 'album') {
             try {                
                 browser = await puppeteer.launch()
                 page = await browser.newPage()
                 await page.goto(url)
                 await page.screenshot({ path: path, clip: { x: 312, y: 212, width: 174, height: 174 } })
+                browser.close()
             } catch (e) {
                 console.log(e)
             }
-            browser.close()
         } else if (type == 'music') {
             try {                
                 browser = await puppeteer.launch()
                 page = await browser.newPage()
                 await page.goto(url)
                 await page.screenshot({ path: path, clip: { x: 100, y: 0, width: 600, height: 600 } })
+                browser.close()
             } catch (e) {
                 console.log(e)
             }
-            browser.close()
         }
     }
 }

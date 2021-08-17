@@ -3,12 +3,21 @@
     margin: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: whitesmoke;
     height: 98%;
 }
-
+.loading{
+    overflow: auto;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    height: 98%;
+}
 @media (max-width: 575.98px) { 
 }
 @media (min-width: 576px) and (max-width: 767.98px) {

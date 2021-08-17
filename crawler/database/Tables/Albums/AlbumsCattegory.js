@@ -25,7 +25,7 @@ async function putAlbumsDB(albumMbid, albumName, albumBiography, albumUrl, album
     await Music.getTopTracks(newAlbumMbid || albumMbid, albumName, artistName)
 }
 
-
+// Essa funcao tem o objetivo de colocar um album sem Mbid no banco de dados.
 async function putAlbumWithoutMibdDB(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageDirectory, artistName) {
     existAlbum = await withoutMbid.findOne({ where: { name: albumName, artistName: artistName, type: 'album' } })
     if (existAlbum) {
@@ -47,6 +47,7 @@ async function putAlbumWithoutMibdDB(albumMbid, albumName, albumBiography, album
         return null
     }
 }
+// Essa funcao tem o objetivo de colocar um album com Mbid no banco de dados.
 async function putAlbumWithMibdDB(albumMbid, albumName, albumBiography, albumUrl, albumReleaseDate, albumImageDirectory) {
     existAlbum = await Albums.findOne({ where: { album_mbid: albumMbid } })
     if (existAlbum)

@@ -14,12 +14,17 @@ let musicArtistName
 let musicArtistMbid
 let prom
 let musics
+/*
+Essa API é responsavel por retornar as recomendacoes da playlist do usuario.
+Para chamar essa API precisamos dos Mbids das musicas que estao na playlist.
+Ela retorna sempre 10 recomendacoes, ranqueando-as de acordo com a pontuacao de similaridade.
+*/
 async function getAllRecommendation(paramsPlaylistMusics) {
     allPlaylistMbidMusics = JSON.parse(paramsPlaylistMusics)
     allRecommendationMusics.length = 0
     for (let i = 0; i < allPlaylistMbidMusics.length; i++) {
         allSimilarMusicsMbid.length = 0
-        musics = await Musics_Similar.findAll({ where: { music_mbid: allPlaylistMbidMusics[i] }, order: [['similarityScore', 'DESC']] })
+        musics = await Musics_Similar.findAll({ where: { music_mbid: allPlaylistMbidMusics[i] }, order: [['similarityScore', 'ASC']], limit: 10  })
         for (let i = 0; i < musics.length; i++) {
             if (!await discardExistingPlaylistMusics(musics[i].dataValues.similarMusic_mbid, allPlaylistMbidMusics)) {
                 allSimilarMusicsMbid.push({ mbid: musics[i].dataValues.similarMusic_mbid, similarityScore: musics[i].dataValues.similarityScore })
@@ -32,8 +37,11 @@ async function getAllRecommendation(paramsPlaylistMusics) {
 }
 
 async function getTop10Musics(allSimilarMusicsMbid) {
-    for (let i = 0; i <= 10; i++) {
-        musicInfo = await getAllMusicInformation(allSimilarMusicsMbid[i].mbid)
+    let arrayLength = allSimilarMusicsMbid.length
+    arrayLength > 10 ? arrayLength= 10 : arrayLength = arrayLength
+    for (let i = 0; i < arrayLength; i++) {
+        console.log(allSimilarMusicsMbid[i].mbid)
+        musicInfo = await getAllMusicInformation(allSimilarMusicsMbid[i].mbid).catch(e =>{console.log(e)})
         musicMbid = musicInfo.music.musicMbid
         musicName = musicInfo.music.musicName
         musicYoutubeUrl = musicInfo.music.musicYoutubeUrl
@@ -54,8 +62,13 @@ async function getTop10Musics(allSimilarMusicsMbid) {
 
 async function discardExistingPlaylistMusics(similarMusicMbid, allPlaylistMbidMusics) {
     for (let i = 0; i <= allPlaylistMbidMusics.length; i++) {
-        if (similarMusicMbid == allPlaylistMbidMusics[i] || similarMusicMbid == allSimilarMusicsMbid[i].mbid)
-            return true
+        if (i < allSimilarMusicsMbid.length){
+            if (similarMusicMbid == allPlaylistMbidMusics[i] || similarMusicMbid == allSimilarMusicsMbid[i].mbid)
+                return true
+        }else{            
+            if (similarMusicMbid == allPlaylistMbidMusics[i])
+                return true
+        }
     }
     return false
 }

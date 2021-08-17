@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const connection = require('../../database')
 
 // Criar a tabela.
+// Essa tabela serve para identificar os itens que nao tem mbid.
 const withoutMbid = connection.define('withoutMbid', {
     newMbid: {
         type: Sequelize.STRING,

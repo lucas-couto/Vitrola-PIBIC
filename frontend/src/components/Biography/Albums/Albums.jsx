@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Albums.css'
 
+import { Ring } from 'react-spinners-css';
 import Musics from './Musics/Musics'
 import { connect } from 'react-redux'
 import { album } from '../../../store/actions/albumAction'
@@ -8,7 +9,7 @@ import API from '../../../store/api'
 let name
 let mbid
 const Albums = props => {
-    const { artistMbid, artistAlbums, albumName, albumMbid, albumBiography, albumImage, albumMusics } = props
+    const { artistAlbums, albumMbid, albumMusics } = props
     const [album_Name, setAlbumName] = useState('block')
     const [displayAlbumList, setDisplayAlbumList] = useState('block')
     const [displayFeaturedAlbum, setDisplayFeaturedAlbum] = useState('none')
@@ -21,8 +22,8 @@ const Albums = props => {
                 <div className="featuredAlbum" key={album.albumMbid}>
                     <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                         <a href="#">
-                            <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50" 
-                            onError={e => {e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png`}}/>
+                            <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50"
+                                onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }} />
                             <strong>{album.albumName}</strong>
                         </a>
                     </li>
@@ -32,8 +33,8 @@ const Albums = props => {
         return (
             <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
                 <a href="#">
-                    <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50" 
-                    onError={e => {e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png`}}/>
+                    <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50"
+                        onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }} />
                     <strong>{album.albumName}</strong>
                 </a>
             </li>
@@ -54,6 +55,7 @@ const Albums = props => {
         name = e.currentTarget.getAttribute("data-name")
         mbid = e.currentTarget.getAttribute("data-mbid")
         setAlbumName(name)
+        props.loadingMusic()
         props.albumInformations(mbid)
         setShowFeaturedAlbum(true)
         setDisplayFeaturedAlbum('flex')
@@ -73,25 +75,16 @@ const Albums = props => {
                 <div className="albumInfo">
                     <strong className="albumName">{album_Name}</strong>
                     <div className="albumContent">
-                        {/* <div className="albumBiography">
-                            <button className="albumBiographyBtn" onClick={handleClickAlbumBiography}><span>Biografia do album</span></button>
-                            <div>
-                                {showAlbumBiography ? (
-                                    <div className="albumBiographyText" style={{ backgroundColor: '#9C9C9C' }}>
-                                        <img src={albumImage} alt="" />
-                                        <p>
-                                            {albumBiography}
-                                        </p>
-                                    </div>
-                                ) : null}
-                            </div>
-                        </div> */}
                         <div>
-                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics}>Musicas do album</button>
+                            <button className="albumBiographyBtn" onClick={handleClickAlbumMusics} disabled={!albumMusics}>Musicas do álbum</button>
+                            {albumMusics ? null : (<Ring
+                                color="#000"
+                                size={31}
+                            />)}
                             <div className="Musics">
                                 {showAlbumMusics ? (
                                     <div className="albumMusics" style={{ backgroundColor: '#9C9C9C' }}>
-                                        <Musics />
+                                        <Musics/>
                                     </div>
                                 ) : null}
                             </div>
@@ -104,7 +97,7 @@ const Albums = props => {
 
     return (
         <div className="albumList">
-            <button className="albumsListBtn" onClick={handleClickAlbumList}>Albums</button>
+            <button className="albumsListBtn" onClick={handleClickAlbumList}>Álbuns</button>
             <div className="albums" style={{ display: displayAlbumList }}>
                 <ul>
                     {List}
@@ -131,6 +124,9 @@ const mapDispatchToProp = dispatch => {
     return {
         async albumInformations(albumMbid) {
             dispatch(await album(albumMbid))
+        },
+        loadingMusic(){
+            dispatch({type: 'LOADING_MUSIC', loadingMusic: true})
         }
     }
 }

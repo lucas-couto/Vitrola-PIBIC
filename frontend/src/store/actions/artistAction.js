@@ -11,7 +11,8 @@ export async function artist(artistMbid) {
                     artistBiography: res.data.artist.artistBiography,
                     artistImage: res.data.artist.artistImage,
                     similarArtists: res.data.artist.similarArtists,
-                    artistAlbums: res.data.artist.artistAlbums
+                    artistAlbums: res.data.artist.artistAlbums,
+                    loadingApp: false
                 }
             }
         })

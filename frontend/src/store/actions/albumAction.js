@@ -6,17 +6,12 @@ export async function album(albumMbid) {
             return {
                 type: 'ALBUM',
                 payload: {
-                    artistMbid: res.data.artist.artistMbid,
-                    artistName: res.data.artist.artistName,
-                    artistBiography: res.data.artist.artistBiography,
-                    artistImage: res.data.artist.artistImage,
-                    similarArtists: res.data.artist.similarArtists,
-                    artistAlbums: res.data.artist.artistAlbums,
-                    albumMbid: res.data.album.albumMbid,
+                    albumMbid: albumMbid,
                     albumName: res.data.album.albumName,
                     albumBiography: res.data.album.albumBiography,
                     albumImage: res.data.album.albumImage,
-                    albumMusics: res.data.album.albumMusics
+                    albumMusics: res.data.album.albumMusics,
+                    loadingMusic: false
                 }
             }
         })

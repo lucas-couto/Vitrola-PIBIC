@@ -59,6 +59,7 @@ const Header = props => {
         mbid = e.currentTarget.getAttribute("data-mbid")
         type = e.currentTarget.getAttribute("data-type")
         setShowResults(false)
+        props.loadingApp()
         if (type == 'artist')
             props.artistAction(mbid)
         if (type == 'album')
@@ -89,7 +90,7 @@ const Header = props => {
     return (
         <div className="Header">
             <label className="SearchLabel">Pesquisar: </label>
-            <input className="SearchInput" type="text" list="data" placeholder=" Artista, Album, Musica" onKeyDown={handleKeyDown} onChange={setValue} />
+            <input className="SearchInput" type="text" list="data"  onKeyDown={handleKeyDown} onChange={setValue} />
             <div className="Icons">
                 <IconButton size="small" onClick={handleSearch}>
                     <SearchIcon style={{ fontSize: 25, color: grey[50] }} />
@@ -134,6 +135,9 @@ const mapDispatchToProps = dispatch => {
         async musicAction(mbid) {
             const action = await music(mbid)
             dispatch(action)
+        },
+        loadingApp(){
+            dispatch({type: 'LOADING_APP', loadingApp: true})
         }
     }
 }

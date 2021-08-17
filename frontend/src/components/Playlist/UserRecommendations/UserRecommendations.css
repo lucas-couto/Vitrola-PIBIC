@@ -28,6 +28,12 @@
     grid-column: 3/span 1;
 }
 
+.playlistRecommendations .loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 
 .musicInfo{
     display: flex;

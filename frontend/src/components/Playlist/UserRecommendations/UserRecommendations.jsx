@@ -12,6 +12,7 @@ import { playMusic, stopMusic } from '../../../store/actions/playMusicAction'
 import { addPlaylistMusic } from '../../../store/actions/playlistAction'
 import { recommendation } from '../../../store/actions/recommendationAction'
 import API from '../../../store/api'
+import { Ring } from 'react-spinners-css';
 let musicMbid
 let musicName
 let musicYoutubeUrl
@@ -26,16 +27,21 @@ const UserRecommendations = props => {
     const medium = useMediaQuery('(min-width: 768px) and (max-width: 991.98px)');
     const large = useMediaQuery('(min-width: 992px) and (max-width: 1366px)');
     const veryLarge = useMediaQuery('(min-width: 1367px)');
-    const { recommendationsMusic, playingMusic, playingMusicName } = props
+    const { recommendationsMusic, playingMusic, playingMusicName, loading } = props
     useEffect(() => {
+        props.loadingRecommendation()
         props.recommendationAction()
     }, [])
     function Recommendations() {
-        if (recommendationsMusic) {
+        if (loading)
+            return (<div className="loading">
+                <Ring color="#fff" size={30} />
+            </div>)
+        else if (recommendationsMusic)
             return ifPlaylistExist()
-        } else {
+        else
             return ifPlaylistNotExist()
-        }
+
     }
     function ifPlaylistExist() {
         const List = recommendationsMusic.map(music => {
@@ -83,8 +89,8 @@ const UserRecommendations = props => {
     function ifPlaylistNotExist() {
         return (
             <label>
-                Aqui são suas musicas recomendadas, que são escolhidas de acordo com o seu gosto musical!
-                Para iniciar as recommendações adicione musicas na sua playlist
+                Aqui são suas musicas recomendadas de acordo com o seu gosto musical!
+                Para iniciar as recomendações adicione musicas na sua playlist
             </label>
         )
     }
@@ -200,7 +206,8 @@ const mapStateToProps = state => {
     return {
         recommendationsMusic: state.recommendation.recommendationMusic,
         playingMusic: state.playMusic.playingMusic,
-        playingMusicName: state.playMusic.musicName
+        playingMusicName: state.playMusic.musicName,
+        loading: state.loading.loadingRecommendation
     }
 }
 const mapDispatchToProp = dispatch => {
@@ -216,6 +223,9 @@ const mapDispatchToProp = dispatch => {
         },
         async recommendationAction() {
             dispatch(await recommendation())
+        },
+        loadingRecommendation(){
+            dispatch({type: 'LOADING_RECOMMENDATION', loadingRecommendation: true})
         }
     }
 }

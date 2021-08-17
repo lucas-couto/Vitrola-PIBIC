@@ -65,7 +65,7 @@ const Biography = props => {
             </div>
             <div className="buttonsBiography">
                 <button className="buttonBiography" style={{ display: displayButtonBiography }} onClick={handleClickBtnBiography}><span>Biografia do Artista</span></button>
-                <button className="albumsBiography" onClick={handleClickBtnAlbums} style={{ display: displayButtonAlbum }} disabled={artistMbid ? false : true}><span>Albums</span></button>
+                <button className="albumsBiography" onClick={handleClickBtnAlbums} style={{ display: displayButtonAlbum }} disabled={artistMbid ? false : true}><span>Álbuns</span></button>
             </div>
             {displayAlbums ? (
                 <Albums />
