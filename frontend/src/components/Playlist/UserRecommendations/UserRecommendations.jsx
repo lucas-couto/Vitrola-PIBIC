@@ -138,6 +138,7 @@ const UserRecommendations = props => {
         albumMbid = e.currentTarget.getAttribute("data-albummbid")
         albumName = e.currentTarget.getAttribute("data-albumname")
         props.playlistAction(musicMbid, musicName, musicYoutubeUrl, musicImage, albumName, albumMbid, artistName, artistMbid)
+        props.loadingRecommendation()
         props.recommendationAction()
     }
     function animatedPlayPause(musicMbid, musicName, urlYoutube, albumName) {
