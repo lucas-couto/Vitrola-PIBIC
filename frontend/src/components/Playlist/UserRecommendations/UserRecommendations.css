@@ -1,3 +1,6 @@
+.loading{
+    background-color: #FF6161;
+}
 .playlistRecommendations{
     overflow: auto;
     color: #fff;
