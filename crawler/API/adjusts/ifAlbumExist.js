@@ -23,15 +23,19 @@ async function ifAlbumExist(albumMbid, albumName, albumBiography, albumUrl, albu
 }
 // Essa funcao e responsavel por verificar se a musica tem URL para o youtube.
 async function ifMusicHaveYoutubeUrl(musicUrl) {
-    browser = await puppeteer.launch()
-    page = await browser.newPage()
-    await page.goto(musicUrl, {waitUntil: 'load', timeout: 0})
-    musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href || null)
-                                .catch(e => console.log('Link nao encontrado!'))
-    await page.close()
-    await browser.close()
-    if (musicYoutubeUrl)
-        counter++
+    try{
+        browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser'})
+        page = await browser.newPage()
+        await page.goto(musicUrl, {waitUntil: 'load', timeout: 0})
+        musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href || null)
+                                    .catch(e => console.log('Link nao encontrado!'))
+        await page.close()
+        await browser.close()
+        if (musicYoutubeUrl)
+            counter++
+    }catch(e){
+        console.log(`Erro (ifMusicHaveYoutubeUrl):${e}`)
+    }
 }
 
 module.exports = { ifAlbumExist }
