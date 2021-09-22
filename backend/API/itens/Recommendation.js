@@ -24,7 +24,7 @@ async function getAllRecommendation(paramsPlaylistMusics) {
     allRecommendationMusics.length = 0
     for (let i = 0; i < allPlaylistMbidMusics.length; i++) {
         allSimilarMusicsMbid.length = 0
-        musics = await Musics_Similar.findAll({ where: { music_mbid: allPlaylistMbidMusics[i] }, order: [['similarityScore', 'ASC']], limit: 10  })
+        musics = await Musics_Similar.findAll({ where: { music_mbid: allPlaylistMbidMusics[i] }, order: [['similarityScore', 'ASC']], limit: 10 })
         for (let i = 0; i < musics.length; i++) {
             if (!await discardExistingPlaylistMusics(musics[i].dataValues.similarMusic_mbid, allPlaylistMbidMusics)) {
                 allSimilarMusicsMbid.push({ mbid: musics[i].dataValues.similarMusic_mbid, similarityScore: musics[i].dataValues.similarityScore })
@@ -33,15 +33,15 @@ async function getAllRecommendation(paramsPlaylistMusics) {
     }
     await orderRecommendationMusics(allSimilarMusicsMbid)
     await getTop10Musics(allSimilarMusicsMbid)
-    return allRecommendationMusics
+    return allRecommendationMusics.length == 0 ? null : allRecommendationMusics
 }
 
 async function getTop10Musics(allSimilarMusicsMbid) {
     let arrayLength = allSimilarMusicsMbid.length
-    arrayLength > 10 ? arrayLength= 10 : arrayLength = arrayLength
+    arrayLength > 10 ? arrayLength = 10 : arrayLength = arrayLength
     for (let i = 0; i < arrayLength; i++) {
         console.log(allSimilarMusicsMbid[i].mbid)
-        musicInfo = await getAllMusicInformation(allSimilarMusicsMbid[i].mbid).catch(e =>{console.log(e)})
+        musicInfo = await getAllMusicInformation(allSimilarMusicsMbid[i].mbid).catch(e => { console.log(e) })
         musicMbid = musicInfo.music.musicMbid
         musicName = musicInfo.music.musicName
         musicYoutubeUrl = musicInfo.music.musicYoutubeUrl
@@ -62,10 +62,10 @@ async function getTop10Musics(allSimilarMusicsMbid) {
 
 async function discardExistingPlaylistMusics(similarMusicMbid, allPlaylistMbidMusics) {
     for (let i = 0; i <= allPlaylistMbidMusics.length; i++) {
-        if (i < allSimilarMusicsMbid.length){
+        if (i < allSimilarMusicsMbid.length) {
             if (similarMusicMbid == allPlaylistMbidMusics[i] || similarMusicMbid == allSimilarMusicsMbid[i].mbid)
                 return true
-        }else{            
+        } else {
             if (similarMusicMbid == allPlaylistMbidMusics[i])
                 return true
         }
