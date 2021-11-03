@@ -1,6 +1,7 @@
 const Musics = require('../../crawler/database/Tables/Musics/Musics')
 const { textSimilarity } = require('./SimilarityUtil1')
 const { putSimilarMusicRLDB } = require('../../crawler/database/Tables/Relational_Tables/Musics_Similar/Musics_SimilarCattegory')
+const Musics_Similar = require('../../crawler/database/Tables/Relational_Tables/Musics_Similar/Musics_Similar')
 let musicPrincipal
 let musicSecondary
 let musicsNumber
@@ -17,7 +18,7 @@ async function Principal() {
         for (let o = i + 1; o < musicsNumber; o++) {
             musicSecondary = await Musics.findAll({ offset: i, limit: 1 })
             await cleanMusicsInformation(musicPrincipal[0], musicSecondary[0])
-            await getSimilarityScore()
+            await getSimilarityScore(musicsComparison[0], musicsComparison[1])
         }
         await putAllSimilarMusicDB(musicPrincipal[0].dataValues.music_mbid)
     }
@@ -36,6 +37,7 @@ async function cleanMusicsInformation(musicPrincipal, musicSecondary){
 
 // Onde vai ser gerado a similaridade entre duas musicas
 async function getSimilarityScore(musicPrincipal, musicSecondary) {
+    console.log(musicPrincipal, musicSecondary);
     similarityScore = await textSimilarity(musicPrincipal, musicSecondary)
     if (similarityScore && similarityScore != NaN)
         await putTop10Similarity(musicSecondary.musicMbid, similarityScore)
