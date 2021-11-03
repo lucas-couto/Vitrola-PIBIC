@@ -16,7 +16,7 @@ async function Principal() {
     for (let i = 0; i < musicsNumber; i++) {
         musicPrincipal = await Musics.findAll({ offset: i, limit: 1 })
         for (let o = i + 1; o < musicsNumber; o++) {
-            musicSecondary = await Musics.findAll({ offset: i, limit: 1 })
+            musicSecondary = await Musics.findAll({ offset: o, limit: 1 })
             await cleanMusicsInformation(musicPrincipal[0], musicSecondary[0])
             await getSimilarityScore(musicsComparison[0], musicsComparison[1])
         }
@@ -37,7 +37,6 @@ async function cleanMusicsInformation(musicPrincipal, musicSecondary){
 
 // Onde vai ser gerado a similaridade entre duas musicas
 async function getSimilarityScore(musicPrincipal, musicSecondary) {
-    console.log(musicPrincipal, musicSecondary);
     similarityScore = await textSimilarity(musicPrincipal, musicSecondary)
     if (similarityScore && similarityScore != NaN)
         await putTop10Similarity(musicSecondary.musicMbid, similarityScore)
