@@ -6,10 +6,10 @@ export async function artist(artistMbid) {
             return {
                 type: 'ARTIST',
                 payload: {
-                    artistMbid: res.data.artist.artistMbid,
-                    artistName: res.data.artist.artistName,
-                    artistBiography: res.data.artist.artistBiography,
-                    artistImage: res.data.artist.artistImage,
+                    artistMbid: res.data.artist.mbid,
+                    artistName: res.data.artist.name,
+                    artistBiography: res.data.artist.biography,
+                    artistImage: res.data.artist.image,
                     similarArtists: res.data.artist.similarArtists,
                     artistAlbums: res.data.artist.artistAlbums,
                     loadingApp: false
