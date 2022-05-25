@@ -3,7 +3,7 @@ let playlist
 let counter
 let ifMusicExist
 export async function addPlaylistMusic(musicMbid, musicName, musicYoutubeUrl, musicDirectoryImage, albumName, albumMbid, artistName, artistMbid) {
-    playlist = await AsyncStorage.getItem('playlist') || []
+    playlist = await localStorage.getItem('playlist') || []
     ifMusicExist = false
     for(let music of playlist) {
         if (music.musicMbid == musicMbid) {
@@ -23,7 +23,7 @@ export async function addPlaylistMusic(musicMbid, musicName, musicYoutubeUrl, mu
             artistMbid
         }
         playlist.push(musicObject)
-        await AsyncStorage.setItem('playlist', JSON.stringify(playlist))
+        await localStorage.setItem('playlist', JSON.stringify(playlist))
         return {
             type: 'ADD_PLAYLIST_MUSIC',
             payload: playlist
@@ -35,15 +35,15 @@ export async function addPlaylistMusic(musicMbid, musicName, musicYoutubeUrl, mu
     }
 }
 
-export function removePlaylistMusic(musicMbid) {
-    playlist = JSON.parse(await AsyncStorage.getItem('playlist')) || []
+export async function removePlaylistMusic(musicMbid) {
+    playlist = JSON.parse(await localStorage.getItem('playlist')) || []
     counter = 0
     for (counter; counter < playlist.length; counter++) {
         if (playlist[counter].musicMbid == musicMbid)
             break
     }
     playlist.splice(counter, 1)
-    await AsyncStorage.setItem('playlist', JSON.stringify(playlist))
+    await localStorage.setItem('playlist', JSON.stringify(playlist))
     return {
         type: 'REMOVE_PLAYLIST_MUSIC',
         payload: playlist
