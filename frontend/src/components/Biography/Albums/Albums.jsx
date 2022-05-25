@@ -17,25 +17,25 @@ const Albums = props => {
     const [showAlbumMusics, setShowAlbumMusics] = useState(false)
     const [showFeaturedAlbum, setShowFeaturedAlbum] = useState(false)
     const List = artistAlbums.map(album => {
-        if (album.albumMbid === albumMbid) {
+        if (album.mbid === albumMbid) {
             return (
-                <div className="featuredAlbum" key={album.albumMbid}>
-                    <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
+                <div className="featuredAlbum" key={album.mbid}>
+                    <li onClick={handleClickFeaturedAlbum} data-mbid={album.mbid} data-name={album.name} key={album.mbid}>
                         <a href="#">
-                            <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50"
+                            <img src={`${API}/image?imageDirectory=${album.image}`} width="50" height="50"
                                 onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }} />
-                            <strong>{album.albumName}</strong>
+                            <strong>{album.name}</strong>
                         </a>
                     </li>
                 </div>
             )
         }
         return (
-            <li onClick={handleClickFeaturedAlbum} data-mbid={album.albumMbid} data-name={album.albumName} key={album.albumMbid}>
+            <li onClick={handleClickFeaturedAlbum} data-mbid={album.mbid} data-name={album.name} key={album.mbid}>
                 <a href="#">
-                    <img src={`${API}/image?imageDirectory=${album.albumImage}`} width="50" height="50"
+                    <img src={`${API}/image?imageDirectory=${album.image}`} width="50" height="50"
                         onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }} />
-                    <strong>{album.albumName}</strong>
+                    <strong>{album.name}</strong>
                 </a>
             </li>
         )
@@ -112,10 +112,10 @@ const mapStateToProps = state => {
     return {
         artistMbid: state.artist.artistMbid,
         artistAlbums: state.artist.artistAlbums,
-        albumMbid: state.album.albumMbid,
-        albumName: state.album.albumName,
+        albumMbid: state.album.mbid,
+        albumName: state.album.name,
         albumBiography: state.album.albumBiography,
-        albumImage: state.album.albumImage,
+        albumImage: state.album.image,
         albumMusics: state.album.albumMusics
     }
 }
