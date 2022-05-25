@@ -146,8 +146,8 @@ const Graph1 = props => {
         allNodes.push({ artistMbid: artistMbid, id: 1, label: artistName, y: 0, font: { size: 24, color: 'Black', face: 'arial' }, color: '#FF6161', border: "#000000" },)
         similarArtists.forEach((artist, index) => {
             id = index + 2
-            similarArtistName = artist.similarArtistName
-            similarArtistMbid = artist.similarArtistMbid
+            similarArtistName = artist.name
+            similarArtistMbid = artist.mbid
             allNodes.push({ artistMbid: similarArtistMbid, id: id, label: similarArtistName },)
             allEdges.push({ from: 1, to: id, arrows: 'from' },)
         })
