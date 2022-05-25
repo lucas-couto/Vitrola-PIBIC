@@ -9,7 +9,7 @@ let country = 'brazil'
 async function Crawler() {
     // Verifica se as tabelas existem, se nao existirem elas sao criadas.
     await createTables
-    await Artist.startCrawler(country)
+    // await Artist.startCrawler(country)
     await Recommendations.startRecommendations()
 }
 

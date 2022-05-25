@@ -8,6 +8,7 @@ let musicsNumber
 let musicsComparison = []
 let top10Similarity = []
 let similarityScore
+let counter = 0
 /*
     Essa funcao e responsavel por um array de musicas e aplicar a comparacao.
 */
@@ -16,11 +17,14 @@ async function Principal() {
     for (let i = 0; i < musicsNumber; i++) {
         musicPrincipal = await Musics.findAll({ offset: i, limit: 1 })
         for (let o = i + 1; o < musicsNumber; o++) {
+            counter++
             musicSecondary = await Musics.findAll({ offset: o, limit: 1 })
             await cleanMusicsInformation(musicPrincipal[0], musicSecondary[0])
             await getSimilarityScore(musicsComparison[0], musicsComparison[1])
+            console.log(counter)
         }
         await putAllSimilarMusicDB(musicPrincipal[0].dataValues.music_mbid)
+        counter = 0;
     }
 }
 

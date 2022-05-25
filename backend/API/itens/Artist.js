@@ -61,8 +61,11 @@ async function getAllArtistInformation(paramsArtistMbid) {
             allSimilarArtists.forEach(artist => {
                 similarArtistName = artist.name
                 similarArtistMbid = artist.artist_mbid
-                // similarArtistImage = artist.directoryImage
-                similarArtists.push({ similarArtistMbid, similarArtistName })
+                similarArtistImage = artist.directoryImage
+                similarArtists.push({ 
+                    mbid: similarArtistMbid, 
+                    name: similarArtistName, 
+                    image: similarArtistImage })
             })
         })
         .catch(e => {
@@ -85,17 +88,20 @@ async function getAllArtistInformation(paramsArtistMbid) {
                 albumMbid = album.album_mbid
                 albumName = album.name
                 albumImage = album.directoryImage
-                artistAlbums.push({ albumMbid, albumName, albumImage })
+                artistAlbums.push({ 
+                    mbid: albumMbid, 
+                    name: albumName, 
+                    image: albumImage })
             })
         })
         .catch(e => {
             console.log(e)
         })
     return {
-        artistMbid,
-        artistName,
-        artistBiography,
-        artistImage,
+        mbid: artistMbid,
+        name: artistName,
+        biography: artistBiography,
+        image: artistImage,
         similarArtists,
         artistAlbums
     }
