@@ -206,7 +206,7 @@ const mapStateToProps = state => {
         albumMbid: state.album.albumMbid,
         albumName: state.album.albumName,
         albumMusics: state.album.albumMusics,
-        playingMusicName: state.playmusic.name,
+        playingMusicName: state.playMusic.musicName,
         playingMusic: state.playMusic.playingMusic,
         musicExist: state.playlist.musicExist,
         loading: state.loading.loadingMusic
