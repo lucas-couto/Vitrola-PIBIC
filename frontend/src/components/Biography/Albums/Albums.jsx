@@ -112,10 +112,10 @@ const mapStateToProps = state => {
     return {
         artistMbid: state.artist.artistMbid,
         artistAlbums: state.artist.artistAlbums,
-        albumMbid: state.album.mbid,
-        albumName: state.album.name,
+        albumMbid: state.album.albumMbid,
+        albumName: state.album.albumName,
         albumBiography: state.album.albumBiography,
-        albumImage: state.album.image,
+        albumImage: state.album.albumImage,
         albumMusics: state.album.albumMusics
     }
 }
