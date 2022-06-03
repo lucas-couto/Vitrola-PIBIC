@@ -166,13 +166,13 @@ const Footer = props => {
     const handleNextMusic = () => {
         if(musicArray && musicArray.length > 1){
             index = actualMusic(musicArray, musicMbid)
-            props.playAMusic(musicArray[index + 1].musicYoutubeUrl, musicArray[index + 1].musicMbid, musicArray[index + 1].musicName, albumName, musicArray)
+            props.playAMusic(musicArray[index + 1].youtubeUrl, musicArray[index + 1].mbid, musicArray[index + 1].name, albumName, musicArray)
         }
     }
     // Tocar a musica anterior
     const handleBackMusic = () => {
         index = actualMusic(musicArray, musicMbid)
-        props.playAMusic(musicArray[index - 1].musicYoutubeUrl, musicArray[index - 1].musicMbid, musicArray[index - 1].musicName, albumName, musicArray)
+        props.playAMusic(musicArray[index - 1].youtubeUrl, musicArray[index - 1].mbid, musicArray[index - 1].name, albumName, musicArray)
     }
 
     return (
