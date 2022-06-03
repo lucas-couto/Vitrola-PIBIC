@@ -7,10 +7,10 @@ export async function album(albumMbid) {
                 type: 'ALBUM',
                 payload: {
                     albumMbid: albumMbid,
-                    albumName: res.data.album.albumName,
-                    albumBiography: res.data.album.albumBiography,
-                    albumImage: res.data.album.albumImage,
-                    albumMusics: res.data.album.albumMusics,
+                    albumName: res.data.album.name,
+                    albumBiography: res.data.album.biography,
+                    albumImage: res.data.album.image,
+                    albumMusics: res.data.album.musics,
                     loadingMusic: false
                 }
             }

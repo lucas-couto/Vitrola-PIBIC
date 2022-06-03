@@ -10,8 +10,8 @@ export async function artist(artistMbid) {
                     artistName: res.data.artist.name,
                     artistBiography: res.data.artist.biography,
                     artistImage: res.data.artist.image,
-                    similarArtists: res.data.artist.similarArtists,
-                    artistAlbums: res.data.artist.artistAlbums,
+                    similarArtists: res.data.artist.similars,
+                    artistAlbums: res.data.artist.albums,
                     loadingApp: false
                 }
             }

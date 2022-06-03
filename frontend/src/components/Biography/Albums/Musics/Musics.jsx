@@ -138,22 +138,22 @@ const Musics = props => {
         }
     }
     const List = albumMusics.map(music => {
-        if (music.musicMbid === props.featuredMusic) {
+        if (music.mbid === props.featuredMusic) {
             return (
                 <div className="featuredItem">
-                    <li data-mbid={music.musicMbid} data-name={music.musicName} key={music.musicMbid}>
+                    <li data-mbid={music.mbid} data-name={music.name} key={music.mbid}>
                         <img
                             className="musicImage"
-                            src={`${API}/image?imageDirectory=${music.musicImage}`}
+                            src={`${API}/image?imageDirectory=${music.image}`}
                             width="30" height="30"
                             onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }}
                         />
                         <strong>
-                            {music.musicName}
+                            {music.name}
                         </strong>
                         <div className="buttonsMusic">
-                            {animatedPlayPause(music.musicMbid, music.musicName, music.musicYoutubeUrl, music.albumName)}
-                            <IconButton size="small" onClick={handleAddPlaylist} data-mbid={music.musicMbid} data-name={music.musicName} data-urlyoutube={music.musicYoutubeUrl} data-musicdirectoryimage={music.musicImage}>
+                            {animatedPlayPause(music.mbid, music.name, music.youtubeUrl, music.albumName)}
+                            <IconButton size="small" onClick={handleAddPlaylist} data-mbid={music.mbid} data-name={music.name} data-urlyoutube={music.youtubeUrl} data-musicdirectoryimage={music.image}>
                                 {responsiveIcon()}
                             </IconButton>
                         </div>
@@ -162,19 +162,19 @@ const Musics = props => {
             )
         } else {
             return (
-                <li data-mbid={music.musicMbid} data-name={music.musicName} key={music.musicMbid}>
+                <li data-mbid={music.mbid} data-name={music.name} key={music.mbid}>
                     <img
                         className="musicImage"
-                        src={`${API}/image?imageDirectory=${music.musicImage}`}
+                        src={`${API}/image?imageDirectory=${music.image}`}
                         width="30" height="30"
                         onError={e => { e.target.src = `${API}/image?imageDirectory=/music/principalMusicIcon.png` }}
                     />
                     <strong>
-                        {music.musicName}
+                        {music.name}
                     </strong>
                     <div className="buttonsMusic">
-                        {animatedPlayPause(music.musicMbid, music.musicName, music.musicYoutubeUrl, music.albumName)}
-                        <IconButton size="small" onClick={handleAddPlaylist} data-mbid={music.musicMbid} data-name={music.musicName} data-urlyoutube={music.musicYoutubeUrl} data-musicdirectoryimage={music.musicImage}>
+                        {animatedPlayPause(music.mbid, music.name, music.youtubeUrl, music.albumName)}
+                        <IconButton size="small" onClick={handleAddPlaylist} data-mbid={music.mbid} data-name={music.name} data-urlyoutube={music.youtubeUrl} data-musicdirectoryimage={music.image}>
                             {responsiveIcon()}
                         </IconButton>
                     </div>
@@ -206,7 +206,7 @@ const mapStateToProps = state => {
         albumMbid: state.album.albumMbid,
         albumName: state.album.albumName,
         albumMusics: state.album.albumMusics,
-        playingMusicName: state.playMusic.musicName,
+        playingMusicName: state.playmusic.name,
         playingMusic: state.playMusic.playingMusic,
         musicExist: state.playlist.musicExist,
         loading: state.loading.loadingMusic

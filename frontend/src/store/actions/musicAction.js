@@ -6,11 +6,11 @@ export async function music(musicMbid) {
             return {
                 type: 'MUSIC',
                 payload: {
-                    albumMbid: res.data.album.albumMbid,
-                    albumName: res.data.album.albumName,
-                    musicMbid: res.data.music.musicMbid,
-                    musicName: res.data.music.musicName,
-                    musicYoutubeUrl: res.data.music.musicYoutubeUrl,
+                    albumMbid: res.data.album.mbid,
+                    albumName: res.data.album.name,
+                    musicMbid: res.data.music.mbid,
+                    musicName: res.data.music.name,
+                    musicYoutubeUrl: res.data.music.youtubeUrl,
                     playingMusic: true,
                     musicArray: null
                 }
