@@ -23,9 +23,9 @@ const UserPlaylist = props => {
     const medium = useMediaQuery('(min-width: 768px) and (max-width: 991.98px)');
     const large = useMediaQuery('(min-width: 992px) and (max-width: 1366px)');
     const veryLarge = useMediaQuery('(min-width: 1367px)');
-    const { playlistMusic, playingMusic, playingMusicName } = props
+    const { playlistMusics, playingMusic, playingMusicName } = props
     function ifPlaylistExist() {
-        const List = playlistMusic.map(music => {
+        const List = playlistMusics.map(music => {
             if (music.musicMbid == props.featuredMusic) {
                 return (
                     <div className="featuredMusic">
@@ -118,7 +118,7 @@ const UserPlaylist = props => {
         musicName = e.currentTarget.getAttribute("data-name")
         musicYoutubeUrl = e.currentTarget.getAttribute("data-urlyoutube")
         albumName = e.currentTarget.getAttribute("data-albumname")
-        props.stopAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, playlistMusic)
+        props.stopAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, playlistMusics)
     }
 
     function clickPlayMusic(e) {
@@ -126,7 +126,7 @@ const UserPlaylist = props => {
         musicName = e.currentTarget.getAttribute("data-name")
         musicYoutubeUrl = e.currentTarget.getAttribute("data-urlyoutube")
         albumName = e.currentTarget.getAttribute("data-albumname")
-        props.playAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, playlistMusic)
+        props.playAMusic(musicYoutubeUrl, musicMbid, musicName, albumName, playlistMusics)
     }
 
     function removeMusic(e) {
@@ -194,14 +194,14 @@ const UserPlaylist = props => {
 
     return (
         <div className="playlistMusic">
-            {playlistMusic.length != 0 ? ifPlaylistExist() : ifPlaylistNotExist()}
+            {playlistMusics.length != 0 ? ifPlaylistExist() : ifPlaylistNotExist()}
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        playlistMusic: state.playlist.playlistMusic,
+        playlistMusics: state.playlist.playlistMusics,
         musicExist: state.playlist.musicExist,
         playingMusic: state.playMusic.playingMusic,
         playingMusicName: state.playMusic.musicName

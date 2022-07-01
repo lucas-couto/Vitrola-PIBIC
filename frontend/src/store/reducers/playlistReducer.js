@@ -1,6 +1,6 @@
-let playlistMusic = JSON.parse(localStorage.getItem('playlistMusics'))
+let playlistMusics = JSON.parse(localStorage.getItem('playlistMusics'))
 const INITIAL_STATE = {
-    playlistMusic
+    playlistMusics
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -8,13 +8,13 @@ export default (state = INITIAL_STATE, action) => {
         case 'addPlaylistMusic':
             return {
                 ...state,
-                playlistMusic: action.payload,
+                playlistMusics: action.payload,
                 musicExist: false,
             }
         case 'removePlaylistMusic':
             return {
                 ...state,
-                playlistMusic: action.payload
+                playlistMusics: action.payload
             }
         case 'NULL':
             return {

@@ -1,11 +1,11 @@
 let musicObject
-let playlist
+let playlistMusics
 let counter
 let ifMusicExist
-export async function addPlaylistMusic(musicMbid, musicName, musicYoutubeUrl, musicDirectoryImage, albumName, albumMbid, artistName, artistMbid) {
-    playlist = await localStorage.getItem('playlist') || []
+export function addPlaylistMusic(musicMbid, musicName, musicYoutubeUrl, musicDirectoryImage, albumName, albumMbid, artistName, artistMbid) {
+    playlistMusics = JSON.parse(localStorage.getItem('playlistMusics')) || []
     ifMusicExist = false
-    for(let music of playlist) {
+    for(let music of playlistMusics) {
         if (music.musicMbid == musicMbid) {
             ifMusicExist = true
             break
@@ -22,11 +22,11 @@ export async function addPlaylistMusic(musicMbid, musicName, musicYoutubeUrl, mu
             artistName,
             artistMbid
         }
-        playlist.push(musicObject)
-        await localStorage.setItem('playlist', JSON.stringify(playlist))
+        playlistMusics.push(musicObject)
+        localStorage.setItem('playlistMusics', JSON.stringify(playlistMusics))
         return {
-            type: 'ADD_PLAYLIST_MUSIC',
-            payload: playlist
+            type: 'addPlaylistMusic',
+            payload: playlistMusics
         }
     }else{
         return {
@@ -35,17 +35,17 @@ export async function addPlaylistMusic(musicMbid, musicName, musicYoutubeUrl, mu
     }
 }
 
-export async function removePlaylistMusic(musicMbid) {
-    playlist = JSON.parse(await localStorage.getItem('playlist')) || []
+export function removePlaylistMusic(musicMbid) {
+    playlistMusics = JSON.parse( localStorage.getItem('playlistMusics')) || []
     counter = 0
-    for (counter; counter < playlist.length; counter++) {
-        if (playlist[counter].musicMbid == musicMbid)
+    for (counter; counter < playlistMusics.length; counter++) {
+        if (playlistMusics[counter].musicMbid == musicMbid)
             break
     }
-    playlist.splice(counter, 1)
-    await localStorage.setItem('playlist', JSON.stringify(playlist))
+    playlistMusics.splice(counter, 1)
+    localStorage.setItem('playlistMusics', JSON.stringify(playlistMusics))
     return {
-        type: 'REMOVE_PLAYLIST_MUSIC',
-        payload: playlist
+        type: 'removePlaylistMusic',
+        payload: playlistMusics
     }
 }
