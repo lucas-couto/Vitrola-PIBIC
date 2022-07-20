@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000'
+const API = 'https://vitrola.sytes.net:3001'
 
 
 module.exports = API
