@@ -13,7 +13,7 @@ async function getUrlYoutube(musicMbid, musicName, musicBiography, musicUrl, mus
     try{
         browser = await puppeteer.launch({executablePath: '/usr/bin/chromium-browser'});
         page = await browser.newPage();
-        await page.goto(musicUrl, {waitUntil: 'load', timeout: 0});
+        await page.goto(musicUrl, {waitUntil: 'load'});
         musicYoutubeUrl = await page.$eval('a.play-this-track-playlink--youtube', res => res.href || null)
                                     .catch(e => console.log('Link nao encontrado!'))
         await page.close()
