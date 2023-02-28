@@ -1,0 +1,1 @@
+export default 'http://ec2-15-228-57-59.sa-east-1.compute.amazonaws.com:3000'
